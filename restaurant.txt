@@ -1,0 +1,9 @@
+1,KFC,4.3,$$$,98531,Chicken,Fast Food,Family Meals
+2,IHOP,4.3,$$,77494,Breakfast and Brunch,Family Meals,Burgers
+3,Starbucks,4.9,$,99218,Coffee and Tea,Breakfast and Brunch,Bakery
+4,McDonalds,4.7,$,98346,Burgers,Fast Food,
+5,Subway,4.5,$,98346,Fast Food,Sandwiches,
+6,Chick-fil-A,4.8,$,98346,Fast Food,Chicken,Sandwiches
+7,Chipotle,4.6,$,98346,Mexican,Fast Food,
+8,Red Lobster,4.4,$$,98346,Seafood,Family Meals,American
+9,Red Robin,4.4,$$,98346,Burgers,American,Family Meals
