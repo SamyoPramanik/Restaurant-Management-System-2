@@ -13,10 +13,10 @@ public class Restaurant implements java.io.Serializable {
     private String category2;
     private String category3;
     private double maxPriceOfFood;
+    volatile private int newOrderCount = 0;
 
-    private List<Food> menu = new ArrayList<Food>();
-    private List<Order> orders = new ArrayList<Order>();
-    private List<Order> newOrders = new ArrayList<Order>();
+    volatile private List<Food> menu = new ArrayList<Food>();
+    volatile private List<Order> orders = new ArrayList<Order>();
 
     public Restaurant() {
         maxPriceOfFood = 0;
@@ -176,10 +176,24 @@ public class Restaurant implements java.io.Serializable {
 
     public void addOrder(int customerId, String foodName, String foodCategory, Boolean isAccepted) {
 
-        if (isAccepted)
-            orders.add(new Order(customerId, searchFood(foodName, foodCategory), isAccepted, id));
+        orders.add(new Order(customerId, searchFood(foodName, foodCategory), isAccepted));
 
-        else
-            newOrders.add(new Order(customerId, searchFood(foodName, foodCategory), isAccepted, id));
+    }
+
+    synchronized public void addNewOrder(int customerId, String foodName, String foodCategory, Boolean isAccepted) {
+        orders.add(0, new Order(customerId, searchFood(foodName, foodCategory), isAccepted));
+        newOrderCount++;
+    }
+
+    public int getNewOrderCount() {
+        return newOrderCount;
+    }
+
+    public void resetOrder() {
+        newOrderCount = 0;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }

@@ -1,0 +1,114 @@
+2,Chicken Tenders,Appetizers,5,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,3 pc. Chicken Box,Big Box Meals,1,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Chocolate Chip Cookie,Bakery,3,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,Chocolate Chip Cookie,Bakery,3,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,Chocolate Chip Cookie,Bakery,3,0
+2,Chocolate Chip Cookie,Bakery,3,0
+2,Chocolate Chip Cookie,Bakery,3,0
+2,Chocolate Chip Cookie,Bakery,3,0
+2,Chocolate Chip Cookie,Bakery,3,0
+2,Chocolate Chip Cookie,Bakery,3,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,3 pc. Chicken Box,Big Box Meals,1,0
+2,Chicken and Pancakes,Combo Meals,2,0
+2,Buffalo Crispy Chicken Strips and Fries,Entrées,2,0
+2,Boneless BBQ Crispy Chicken Strips and Fries,Entrées,2,0
+2,Buttermilk Crispy Chicken Strips and Fries,Entrées,2,0
+2,Buttermilk Crispy Chicken,Entrées,2,0
+2,Cheesy Chicken Bacon Ranch,Entrées,2,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,3 pc. Chicken Box,Big Box Meals,1,0
+2,Chicken and Pancakes,Combo Meals,2,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,3 pc. Chicken Box,Big Box Meals,1,0
+2,Chicken and Pancakes,Combo Meals,2,0
+2,Buffalo Crispy Chicken Strips and Fries,Entrées,2,0
+2,Boneless BBQ Crispy Chicken Strips and Fries,Entrées,2,0
+2,Buttermilk Crispy Chicken Strips and Fries,Entrées,2,0
+2,Buttermilk Crispy Chicken,Entrées,2,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,3 pc. Chicken Box,Big Box Meals,1,0
+2,Chicken and Pancakes,Combo Meals,2,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,3 pc. Chicken Box,Big Box Meals,1,0
+2,Chicken and Pancakes,Combo Meals,2,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,3 pc. Chicken Box,Big Box Meals,1,0
+2,Chicken and Pancakes,Combo Meals,2,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,3 pc. Chicken Box,Big Box Meals,1,0
+2,Chicken and Pancakes,Combo Meals,2,0
+2,Buffalo Crispy Chicken Strips and Fries,Entrées,2,0
+2,Boneless BBQ Crispy Chicken Strips and Fries,Entrées,2,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,3 pc. Chicken Box,Big Box Meals,1,0
+2,Chicken and Pancakes,Combo Meals,2,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Classic Chicken Sandwich Box,Big Box Meals,1,0
+2,3 pc. Chicken Box,Big Box Meals,1,0
+2,Chicken and Pancakes,Combo Meals,2,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+2,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+5,Spicy Chicken Sandwich Box,Big Box Meals,1,0

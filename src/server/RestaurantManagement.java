@@ -24,11 +24,11 @@ public class RestaurantManagement {
     private int updateCount = 0;
 
     static Scanner scn = new Scanner(System.in);
-    private List<Restaurant> restaurantList = new ArrayList<Restaurant>();
-    private List<ResCategory> categories = new ArrayList<ResCategory>();
-    private List<Food> foodList = new ArrayList<Food>();
-    private List<User> userList = new ArrayList<User>();
-    private List<Customer> customerList = new ArrayList<Customer>();
+    volatile private List<Restaurant> restaurantList = new ArrayList<Restaurant>();
+    volatile private List<ResCategory> categories = new ArrayList<ResCategory>();
+    volatile private List<Food> foodList = new ArrayList<Food>();
+    volatile private List<User> userList = new ArrayList<User>();
+    volatile private List<Customer> customerList = new ArrayList<Customer>();
     private Admin admin = new Admin("admin");
 
     synchronized private void increaseUpdate() {
@@ -114,17 +114,18 @@ public class RestaurantManagement {
         userList.add(new User(username, password, type, id));
         customerList.add(new Customer(id, name));
         increaseUpdate();
-        return new Response("User added", null);
+        return new Response("User added", id);
     }
 
     public Response searchUser(String username, String password) {
         for (User u : userList) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+                System.out.println(u.getUsername() + " " + u.getPassword());
                 System.out.println("user found");
                 if (u.getType().equals("customer")) {
                     for (Customer c : customerList) {
                         if (c.getId() == u.getId()) {
-                            Response response = new Response("customer", c);
+                            Response response = new Response("customer", c.getId());
                             return response;
                         }
                     }
@@ -133,7 +134,7 @@ public class RestaurantManagement {
                 else if (u.getType().equals("restaurant")) {
                     for (Restaurant r : restaurantList) {
                         if (r.getId() == u.getId()) {
-                            Response response = new Response("restaurant", r);
+                            Response response = new Response("restaurant", r.getId());
                             return response;
                         }
                     }
@@ -150,23 +151,58 @@ public class RestaurantManagement {
 
     }
 
-    void addOrder(int customerId, String foodName, String foodCategory, int restaurantId, boolean isAccepted) {
-        Food food = new Food();
-
+    public Response addOrder(int customerId, Food food, int restaurantId, boolean isAccepted) {
+        Boolean orderInRestaurant = false, orderInCustomer = false;
         for (Restaurant r : restaurantList) {
             if (r.getId() == restaurantId) {
-                r.addOrder(customerId, foodName, foodCategory, isAccepted);
-                food = r.searchFood(foodName, foodCategory);
+                r.addOrder(customerId, food.getName(), food.getCategory(), isAccepted);
+                food = r.searchFood(food.getName(), food.getCategory());
+                orderInRestaurant = true;
                 break;
             }
         }
 
         for (Customer c : customerList) {
             if (c.getId() == customerId) {
-                c.addOrder(new Order(customerId, food, isAccepted, restaurantId));
+                c.addOrder(new Order(customerId, food, isAccepted));
+                orderInCustomer = true;
                 break;
             }
         }
+
+        if (orderInRestaurant && orderInCustomer) {
+            increaseUpdate();
+            return new Response("Order added", null);
+        }
+
+        return new Response("Order not added", null);
+    }
+
+    public Response addNewOrder(int customerId, Food food, int restaurantId, boolean isAccepted) {
+        Boolean orderInRestaurant = false, orderInCustomer = false;
+        for (Restaurant r : restaurantList) {
+            if (r.getId() == restaurantId) {
+                r.addNewOrder(customerId, food.getName(), food.getCategory(), isAccepted);
+                food = r.searchFood(food.getName(), food.getCategory());
+                orderInRestaurant = true;
+                break;
+            }
+        }
+
+        for (Customer c : customerList) {
+            if (c.getId() == customerId) {
+                c.addOrder(new Order(customerId, food, isAccepted));
+                orderInCustomer = true;
+                break;
+            }
+        }
+
+        if (orderInRestaurant && orderInCustomer) {
+            increaseUpdate();
+            return new Response("Order added", null);
+        }
+
+        return new Response("Order not added", null);
     }
 
     public List<Restaurant> searchRestaurantByName(String name) {
@@ -178,6 +214,16 @@ public class RestaurantManagement {
         }
 
         return restaurants;
+    }
+
+    public Restaurant searchRestaurantById(int id) {
+        for (Restaurant r : restaurantList) {
+            if (r.getId() == id) {
+                return r;
+            }
+        }
+
+        return null;
     }
 
     public List<Restaurant> searchRestaurantByScore(double minScore, double maxScore) {
@@ -226,6 +272,23 @@ public class RestaurantManagement {
         return res;
     }
 
+    public int getNewOrders(int resId) {
+        Restaurant r = searchRestaurantById(resId);
+        int order = r.getNewOrderCount();
+        r.resetOrder();
+
+        System.out.println("number of new Orders in " + r.getName() + ": " + order);
+
+        return order;
+    }
+
+    public List<Order> getOrders(int resId) {
+        Restaurant r = searchRestaurantById(resId);
+        List<Order> orders = r.getOrders();
+        System.out.println("number of Orders in " + r.getName() + ": " + orders.size());
+        return orders;
+    }
+
     public List<ResCategory> showAll() {
         List<ResCategory> rcs = new ArrayList<ResCategory>();
 
@@ -271,6 +334,16 @@ public class RestaurantManagement {
         }
 
         return foods;
+    }
+
+    public Food searchFood(String name, String category) {
+        for (Food food : foodList) {
+            if (food.getName().equalsIgnoreCase(name) && food.getCategory().equalsIgnoreCase(category)) {
+                return food;
+            }
+        }
+
+        return null;
     }
 
     public List<Food> searchFoodByCategoryGivenRestaurant(String category, String resName) {
@@ -593,7 +666,7 @@ public class RestaurantManagement {
         for (Customer c : customerList) {
             for (Order o : c.getOrders()) {
                 br.write(o.getCustomerId() + "," + o.getFood().getName() + "," + o.getFood().getCategory() + ","
-                        + o.getRestaurantId() + "," + (o.isAccepted() ? 1 : 0) + "\n");
+                        + o.getResId() + "," + (o.isAccepted() ? 1 : 0) + "\n");
             }
         }
         br.close();
@@ -686,9 +759,6 @@ public class RestaurantManagement {
         br = new BufferedReader(new FileReader("orders.txt"));
         while (true) {
             String line = br.readLine();
-
-            Order order;
-
             if (line == null)
                 break;
 
@@ -700,14 +770,22 @@ public class RestaurantManagement {
             int restaurantId = Integer.parseInt(parts[3]);
             int isAccepted = Integer.parseInt(parts[4]);
 
-            addOrder(customerId, foodName, foodCategory, restaurantId, isAccepted == 1 ? true : false);
+            for (Restaurant r : restaurantList)
+                if (r.getId() == restaurantId) {
+                    r.addOrder(customerId, foodName, foodCategory, isAccepted == 1 ? true : false);
+                    break;
+                }
+
+            for (Customer c : customerList)
+                if (c.getId() == customerId) {
+                    c.addOrder(new Order(customerId, searchFood(foodName, foodCategory),
+                            isAccepted == 1 ? true : false));
+                    break;
+                }
         }
         br.close();
         System.out.println("All customer loaded");
 
-    }
-
-    public void saveFiles() {
     }
 
 }

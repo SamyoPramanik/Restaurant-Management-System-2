@@ -3,6 +3,8 @@ package client;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.channels.NetworkChannel;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import requests.*;
@@ -11,6 +13,9 @@ import util.*;
 public class Client {
     Response response;
     NetworkUtil nu;
+    Customer customer;
+    Restaurant restaurant;
+    Admin admin;
 
     public Client() {
         try {
@@ -46,17 +51,19 @@ public class Client {
         Response response = (Response) nu.read();
 
         if (response.getMessage().equals("admin")) {
-            Admin admin = (Admin) response.getData();
+            admin = (Admin) response.getData();
             System.out.println(admin.getName());
             showAdminHome(admin);
         }
 
         else if (response.getMessage().equals("customer")) {
-            Customer customer = (Customer) response.getData();
+            int customer = (int) response.getData();
+            new CustomerUser(nu, customer);
         }
 
         else if (response.getMessage().equals("restaurant")) {
-            Restaurant restaurant = (Restaurant) response.getData();
+            int restaurant = (int) response.getData();
+            new RestaurantUser(nu, restaurant);
         }
 
         else
@@ -78,6 +85,9 @@ public class Client {
         nu.write(new Register(name, username, password, "customer"));
         Response response = (Response) nu.read();
         System.out.println(response.getMessage());
+        int customer = (int) response.getData();
+
+        new CustomerUser(nu, customer);
     }
 
     public void showAdminHome(Admin admin) {

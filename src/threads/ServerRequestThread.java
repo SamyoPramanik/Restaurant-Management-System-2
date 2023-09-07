@@ -2,17 +2,12 @@ package threads;
 
 import java.util.List;
 
-import requests.Login;
-import requests.Register;
-import requests.SearchRestaurant;
+import requests.*;
 import server.RestaurantManagement;
-import util.NetworkUtil;
-import util.Response;
-import util.Restaurant;
-import util.SocketWrapper;
+import util.*;
 
 public class ServerRequestThread implements Runnable {
-    private RestaurantManagement res;
+    volatile private RestaurantManagement res;
     private NetworkUtil nu;
 
     public ServerRequestThread(RestaurantManagement res, NetworkUtil nu) {
@@ -35,6 +30,7 @@ public class ServerRequestThread implements Runnable {
                     String str = (String) request;
                     System.out.println(str);
                 }
+
                 if (request instanceof Login) {
                     System.out.println("login request");
                     Login login = (Login) request;
@@ -96,9 +92,72 @@ public class ServerRequestThread implements Runnable {
                     }
 
                 }
+
+                else if (request instanceof SearchFood) {
+                    System.out.println("Search Food request");
+
+                    SearchFood search = (SearchFood) request;
+
+                    if (search.by.equals("name")) {
+                        List<Food> foods = res.searchFoodByName(search.str);
+                        sendSearchFoodResponse(foods);
+
+                    }
+
+                    else if (search.by.equals("category")) {
+                        List<Food> foods = res.searchFoodByCategory(search.str);
+                        sendSearchFoodResponse(foods);
+
+                    }
+
+                    else if (search.by.equals("price")) {
+                        List<Food> foods = res.searchFoodByPriceRange(search.minScore, search.maxScore);
+                        sendSearchFoodResponse(foods);
+                    }
+                }
+
+                else if (request instanceof Order) {
+                    Order order = (Order) request;
+                    Response response = res.addNewOrder(order.getCustomerId(), order.getFood(), order.getResId(),
+                            order.isAccepted());
+                    nu.write(response);
+                }
+
+                else if (request instanceof CheckNewOrder) {
+                    CheckNewOrder search = (CheckNewOrder) request;
+
+                    int newOrders = res.getNewOrders(search.resId);
+                    Response response;
+
+                    if (newOrders > 0)
+                        response = new Response(newOrders + " new orders", null);
+                    else
+                        response = new Response("no new order", null);
+
+                    nu.write(response);
+
+                }
+
+                else if (request instanceof RestaurantGetOrder) {
+                    RestaurantGetOrder order = (RestaurantGetOrder) request;
+
+                    List<Order> orders = res.getOrders(order.resId);
+                    System.out.println("orders: " + orders.size());
+                    Response response = new Response("orders", orders);
+                    nu.write(response);
+                }
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
+    }
+
+    private void sendSearchFoodResponse(List<Food> foods) throws Exception {
+        System.out.println("serch food response sending...");
+        Response response = new Response("found", foods);
+        if (foods.size() == 0)
+            response.setMessage("not found");
+
+        nu.write(response);
     }
 }
