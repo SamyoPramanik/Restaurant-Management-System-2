@@ -1,7 +1,7 @@
 package client;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import requests.CheckNewOrder;
@@ -44,13 +44,18 @@ public class RestaurantUser {
 
                 if (choice == 2) {
                     nu.write(new RestaurantGetOrder(resId));
-                    isOrderChecking = false;
-                    SendRequest request = new SendRequest(this);
-                    request.join();
+                    // isOrderChecking = false;
+                    // SendRequest request = new SendRequest(this);
+                    // request.join();
+                    Object o = nu.read();
+                    if (o instanceof Response) {
+                        response = (Response) o;
+                    }
 
                     if (response != null && response.getMessage().equals("orders")) {
                         Object data = response.getData();
-                        List<Order> orders = (List) data;
+                        ArrayList<Order> orders = (ArrayList<Order>) data;
+                        response = null;
 
                         for (int i = 1; i <= orders.size(); i++) {
                             System.out.println(i + ". " + orders.get(i - 1).getFood().getName());
@@ -70,14 +75,13 @@ public class RestaurantUser {
             wait();
 
         Object o = nu.read();
-        if (o instanceof Response) {
-            response = (Response) o;
-            List<Order> orders = (List) response.getData();
+        System.out.println("response received");
 
-            System.out.println("orders: " + orders.size());
+        if (o instanceof Response) {
+            this.response = (Response) o;
         }
-        // isOrderChecking = true;
-        // notifyAll();
+        isOrderChecking = true;
+        notifyAll();
     }
 
     synchronized public void showNewOrder() throws Exception {
@@ -97,6 +101,7 @@ public class RestaurantUser {
                 if (newOrder.getMessage().equals("no new order") == false)
                     System.out.println(newOrder.getMessage());
 
+                response = null;
                 Thread.sleep(1000);
             }
         } catch (Exception e) {

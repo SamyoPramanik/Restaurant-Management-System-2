@@ -1,12 +1,11 @@
 package util;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ResCategory {
     private String name;
 
-    private List<String> list = new ArrayList<String>();
+    private ArrayList<String> list = new ArrayList<String>();
 
     public ResCategory() {
         name = "";
@@ -20,7 +19,7 @@ public class ResCategory {
         return name;
     }
 
-    public List<String> getRestaurantList() {
+    public ArrayList<String> getRestaurantList() {
         return list;
     }
 

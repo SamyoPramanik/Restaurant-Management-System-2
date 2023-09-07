@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import util.Admin;
@@ -24,11 +23,11 @@ public class RestaurantManagement {
     private int updateCount = 0;
 
     static Scanner scn = new Scanner(System.in);
-    volatile private List<Restaurant> restaurantList = new ArrayList<Restaurant>();
-    volatile private List<ResCategory> categories = new ArrayList<ResCategory>();
-    volatile private List<Food> foodList = new ArrayList<Food>();
-    volatile private List<User> userList = new ArrayList<User>();
-    volatile private List<Customer> customerList = new ArrayList<Customer>();
+    volatile private ArrayList<Restaurant> restaurantList = new ArrayList<Restaurant>();
+    volatile private ArrayList<ResCategory> categories = new ArrayList<ResCategory>();
+    volatile private ArrayList<Food> foodList = new ArrayList<Food>();
+    volatile private ArrayList<User> userList = new ArrayList<User>();
+    volatile private ArrayList<Customer> customerList = new ArrayList<Customer>();
     private Admin admin = new Admin("admin");
 
     synchronized private void increaseUpdate() {
@@ -205,8 +204,8 @@ public class RestaurantManagement {
         return new Response("Order not added", null);
     }
 
-    public List<Restaurant> searchRestaurantByName(String name) {
-        List<Restaurant> restaurants = new ArrayList<Restaurant>();
+    public ArrayList<Restaurant> searchRestaurantByName(String name) {
+        ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
         for (Restaurant r : restaurantList) {
             if (isContains(r.getName(), name)) {
                 restaurants.add(r);
@@ -226,8 +225,8 @@ public class RestaurantManagement {
         return null;
     }
 
-    public List<Restaurant> searchRestaurantByScore(double minScore, double maxScore) {
-        List<Restaurant> res = new ArrayList<Restaurant>();
+    public ArrayList<Restaurant> searchRestaurantByScore(double minScore, double maxScore) {
+        ArrayList<Restaurant> res = new ArrayList<Restaurant>();
 
         for (Restaurant r : restaurantList) {
             if (minScore <= r.getScore() && r.getScore() <= maxScore) {
@@ -237,8 +236,8 @@ public class RestaurantManagement {
         return res;
     }
 
-    public List<Restaurant> searchRestaurantByPrice(String price) {
-        List<Restaurant> res = new ArrayList<Restaurant>();
+    public ArrayList<Restaurant> searchRestaurantByPrice(String price) {
+        ArrayList<Restaurant> res = new ArrayList<Restaurant>();
 
         for (Restaurant r : restaurantList) {
             if (r.getPrice().equalsIgnoreCase(price)) {
@@ -249,8 +248,8 @@ public class RestaurantManagement {
         return res;
     }
 
-    public List<Restaurant> searchRestaurantByZipCode(String zipcode) {
-        List<Restaurant> res = new ArrayList<Restaurant>();
+    public ArrayList<Restaurant> searchRestaurantByZipCode(String zipcode) {
+        ArrayList<Restaurant> res = new ArrayList<Restaurant>();
 
         for (Restaurant r : restaurantList) {
             if (r.getZipcode().equalsIgnoreCase(zipcode)) {
@@ -260,8 +259,8 @@ public class RestaurantManagement {
         return res;
     }
 
-    public List<Restaurant> searchRestaurantByCategory(String category) {
-        List<Restaurant> res = new ArrayList<Restaurant>();
+    public ArrayList<Restaurant> searchRestaurantByCategory(String category) {
+        ArrayList<Restaurant> res = new ArrayList<Restaurant>();
 
         for (Restaurant r : restaurantList) {
             if (r.hasCategory(category)) {
@@ -282,15 +281,15 @@ public class RestaurantManagement {
         return order;
     }
 
-    public List<Order> getOrders(int resId) {
+    public ArrayList<Order> getOrders(int resId) {
         Restaurant r = searchRestaurantById(resId);
-        List<Order> orders = r.getOrders();
+        ArrayList<Order> orders = r.getOrders();
         System.out.println("number of Orders in " + r.getName() + ": " + orders.size());
         return orders;
     }
 
-    public List<ResCategory> showAll() {
-        List<ResCategory> rcs = new ArrayList<ResCategory>();
+    public ArrayList<ResCategory> showAll() {
+        ArrayList<ResCategory> rcs = new ArrayList<ResCategory>();
 
         for (ResCategory rc : categories) {
             rcs.add(rc);
@@ -299,8 +298,8 @@ public class RestaurantManagement {
         return rcs;
     }
 
-    public List<Food> searchFoodByName(String name) {
-        List<Food> foods = new ArrayList<Food>();
+    public ArrayList<Food> searchFoodByName(String name) {
+        ArrayList<Food> foods = new ArrayList<Food>();
 
         for (Food food : foodList) {
             if (isContains(food.getName(), name)) {
@@ -311,8 +310,8 @@ public class RestaurantManagement {
         return foods;
     }
 
-    public List<Food> searchFoodByNameGivenRestaurant(String foodName, String resName) {
-        List<Food> foods = new ArrayList<Food>();
+    public ArrayList<Food> searchFoodByNameGivenRestaurant(String foodName, String resName) {
+        ArrayList<Food> foods = new ArrayList<Food>();
 
         for (Restaurant r : restaurantList) {
             if (isContains(r.getName(), resName)) {
@@ -324,8 +323,8 @@ public class RestaurantManagement {
         return foods;
     }
 
-    public List<Food> searchFoodByCategory(String category) {
-        List<Food> foods = new ArrayList<Food>();
+    public ArrayList<Food> searchFoodByCategory(String category) {
+        ArrayList<Food> foods = new ArrayList<Food>();
 
         for (Food food : foodList) {
             if (isContains(food.getCategory(), category)) {
@@ -346,8 +345,8 @@ public class RestaurantManagement {
         return null;
     }
 
-    public List<Food> searchFoodByCategoryGivenRestaurant(String category, String resName) {
-        List<Food> foods = new ArrayList<Food>();
+    public ArrayList<Food> searchFoodByCategoryGivenRestaurant(String category, String resName) {
+        ArrayList<Food> foods = new ArrayList<Food>();
 
         for (Restaurant r : restaurantList) {
             if (isContains(r.getName(), resName)) {
@@ -359,8 +358,8 @@ public class RestaurantManagement {
         return foods;
     }
 
-    public List<Food> searchFoodByPriceRange(double minPrice, double maxPrice) {
-        List<Food> foods = new ArrayList<Food>();
+    public ArrayList<Food> searchFoodByPriceRange(double minPrice, double maxPrice) {
+        ArrayList<Food> foods = new ArrayList<Food>();
 
         for (Food food : foodList) {
             if (minPrice <= food.getPrice() && food.getPrice() <= maxPrice) {
@@ -371,8 +370,8 @@ public class RestaurantManagement {
         return foods;
     }
 
-    public List<Food> searchFoodByPriceRangeGivenRestaurant(double minPrice, double maxPrice, String resName) {
-        List<Food> foods = new ArrayList<Food>();
+    public ArrayList<Food> searchFoodByPriceRangeGivenRestaurant(double minPrice, double maxPrice, String resName) {
+        ArrayList<Food> foods = new ArrayList<Food>();
 
         for (Restaurant r : restaurantList) {
             if (r.getName().equalsIgnoreCase(resName)) {
@@ -384,8 +383,8 @@ public class RestaurantManagement {
         return foods;
     }
 
-    public List<Food> searchCostliestFood(String resName) {
-        List<Food> foods = new ArrayList<Food>();
+    public ArrayList<Food> searchCostliestFood(String resName) {
+        ArrayList<Food> foods = new ArrayList<Food>();
         for (Restaurant r : restaurantList) {
             if (r.getName().equalsIgnoreCase(resName)) {
                 foods = r.showCostliestFood();
@@ -426,7 +425,7 @@ public class RestaurantManagement {
                     "5) By Price Range\r\n" + //
                     "6) By Price Range in a Given Restaurant\r\n" + //
                     "7) Costliest Food Item(s) on the Menu in a Given Restaurant\r\n" + //
-                    "8) List of Restaurants and Total Food Item on the Menu\r\n" + //
+                    "8) ArrayList of Restaurants and Total Food Item on the Menu\r\n" + //
                     "9) Back to Main Menu\n");
 
             int choice = Integer.parseInt(scn.nextLine());
@@ -436,7 +435,7 @@ public class RestaurantManagement {
                     System.out.println("Food name: ");
                     String name = scn.nextLine();
 
-                    List<Food> foods = searchFoodByName(name);
+                    ArrayList<Food> foods = searchFoodByName(name);
 
                     if (foods.isEmpty()) {
                         System.out.println("\nNo such food item with this name\n");
@@ -464,7 +463,7 @@ public class RestaurantManagement {
                         break;
                     }
 
-                    List<Food> foods = searchFoodByNameGivenRestaurant(foodName, resName);
+                    ArrayList<Food> foods = searchFoodByNameGivenRestaurant(foodName, resName);
 
                     if (foods.isEmpty()) {
                         System.out.println("\nNo such food in " + resName + "\n");
@@ -484,7 +483,7 @@ public class RestaurantManagement {
                     System.out.println("Food category: ");
                     String category = scn.nextLine();
 
-                    List<Food> foods = searchFoodByCategory(category);
+                    ArrayList<Food> foods = searchFoodByCategory(category);
 
                     if (foods.isEmpty()) {
                         System.out.println("\nNo food in this category\n");
@@ -513,7 +512,7 @@ public class RestaurantManagement {
                         break;
                     }
 
-                    List<Food> foods = searchFoodByCategoryGivenRestaurant(category, resName);
+                    ArrayList<Food> foods = searchFoodByCategoryGivenRestaurant(category, resName);
 
                     if (foods.isEmpty()) {
                         System.out.println("\nNo food in this category\n");
@@ -538,7 +537,7 @@ public class RestaurantManagement {
                     System.out.println("Max price:");
                     double maxPrice = Double.parseDouble(scn.nextLine());
 
-                    List<Food> foods = searchFoodByPriceRange(minPrice, maxPrice);
+                    ArrayList<Food> foods = searchFoodByPriceRange(minPrice, maxPrice);
 
                     if (foods.isEmpty()) {
                         System.out.println("\nNo food in this category\n");
@@ -568,7 +567,7 @@ public class RestaurantManagement {
                         break;
                     }
 
-                    List<Food> foods = searchFoodByPriceRangeGivenRestaurant(minPrice, maxPrice, resName);
+                    ArrayList<Food> foods = searchFoodByPriceRangeGivenRestaurant(minPrice, maxPrice, resName);
 
                     if (foods.isEmpty()) {
                         System.out.println("\nNo food in this price range\n");
@@ -592,7 +591,7 @@ public class RestaurantManagement {
                         break;
                     }
 
-                    List<Food> foods = searchCostliestFood(resName);
+                    ArrayList<Food> foods = searchCostliestFood(resName);
 
                     if (foods.size() == 0) {
                         System.out.println("\nNo food in this restaurant\n");

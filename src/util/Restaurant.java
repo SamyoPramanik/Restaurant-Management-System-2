@@ -1,7 +1,6 @@
 package util;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Restaurant implements java.io.Serializable {
     private int id;
@@ -15,8 +14,8 @@ public class Restaurant implements java.io.Serializable {
     private double maxPriceOfFood;
     volatile private int newOrderCount = 0;
 
-    volatile private List<Food> menu = new ArrayList<Food>();
-    volatile private List<Order> orders = new ArrayList<Order>();
+    volatile private ArrayList<Food> menu = new ArrayList<Food>();
+    volatile private ArrayList<Order> orders = new ArrayList<Order>();
 
     public Restaurant() {
         maxPriceOfFood = 0;
@@ -96,8 +95,8 @@ public class Restaurant implements java.io.Serializable {
             maxPriceOfFood = price;
     }
 
-    public List<Food> showFoodByName(String name) {
-        List<Food> foods = new ArrayList<Food>();
+    public ArrayList<Food> showFoodByName(String name) {
+        ArrayList<Food> foods = new ArrayList<Food>();
         for (Food food : menu) {
             if (isContains(food.getName(), name)) {
                 foods.add(food);
@@ -112,8 +111,8 @@ public class Restaurant implements java.io.Serializable {
         return menu.size();
     }
 
-    public List<Food> showFoodByPrice(double minPrice, double maxPrice) {
-        List<Food> foods = new ArrayList<Food>();
+    public ArrayList<Food> showFoodByPrice(double minPrice, double maxPrice) {
+        ArrayList<Food> foods = new ArrayList<Food>();
         for (Food food : menu) {
             if (minPrice <= food.getPrice() && food.getPrice() <= maxPrice) {
                 foods.add(food);
@@ -123,8 +122,8 @@ public class Restaurant implements java.io.Serializable {
         return foods;
     }
 
-    public List<Food> showCostliestFood() {
-        List<Food> costliestFood = new ArrayList<Food>();
+    public ArrayList<Food> showCostliestFood() {
+        ArrayList<Food> costliestFood = new ArrayList<Food>();
         for (Food food : menu) {
             if (food.getPrice() >= maxPriceOfFood) {
                 costliestFood.add(food);
@@ -153,8 +152,8 @@ public class Restaurant implements java.io.Serializable {
         System.out.println("  " + category3);
     }
 
-    public List<Food> showFoodByCategory(String name) {
-        List<Food> foods = new ArrayList<Food>();
+    public ArrayList<Food> showFoodByCategory(String name) {
+        ArrayList<Food> foods = new ArrayList<Food>();
         for (Food food : menu) {
             if (isContains(food.getCategory(), name)) {
                 foods.add(food);
@@ -193,7 +192,7 @@ public class Restaurant implements java.io.Serializable {
         newOrderCount = 0;
     }
 
-    public List<Order> getOrders() {
+    public ArrayList<Order> getOrders() {
         return orders;
     }
 }

@@ -1,6 +1,6 @@
 package threads;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import requests.*;
 import server.RestaurantManagement;
@@ -55,7 +55,7 @@ public class ServerRequestThread implements Runnable {
                     SearchRestaurant search = (SearchRestaurant) request;
 
                     if (search.by.equals("name")) {
-                        List<Restaurant> r = res.searchRestaurantByName(search.str);
+                        ArrayList<Restaurant> r = res.searchRestaurantByName(search.str);
 
                         Response response = new Response("found", r);
                         nu.write(response);
@@ -63,28 +63,28 @@ public class ServerRequestThread implements Runnable {
                     }
 
                     else if (search.by.equals("category")) {
-                        List<Restaurant> r = res.searchRestaurantByCategory(search.str);
+                        ArrayList<Restaurant> r = res.searchRestaurantByCategory(search.str);
 
                         Response response = new Response("found", r);
                         nu.write(response);
                     }
 
                     else if (search.by.equals("price")) {
-                        List<Restaurant> r = res.searchRestaurantByPrice(search.str);
+                        ArrayList<Restaurant> r = res.searchRestaurantByPrice(search.str);
 
                         Response response = new Response("found", r);
                         nu.write(response);
                     }
 
                     else if (search.by.equals("zipcode")) {
-                        List<Restaurant> r = res.searchRestaurantByZipCode(search.str);
+                        ArrayList<Restaurant> r = res.searchRestaurantByZipCode(search.str);
 
                         Response response = new Response("found", r);
                         nu.write(response);
                     }
 
                     else if (search.by.equals("score")) {
-                        List<Restaurant> r = res.searchRestaurantByScore(search.minScore,
+                        ArrayList<Restaurant> r = res.searchRestaurantByScore(search.minScore,
                                 search.maxScore);
 
                         Response response = new Response("found", r);
@@ -99,19 +99,19 @@ public class ServerRequestThread implements Runnable {
                     SearchFood search = (SearchFood) request;
 
                     if (search.by.equals("name")) {
-                        List<Food> foods = res.searchFoodByName(search.str);
+                        ArrayList<Food> foods = res.searchFoodByName(search.str);
                         sendSearchFoodResponse(foods);
 
                     }
 
                     else if (search.by.equals("category")) {
-                        List<Food> foods = res.searchFoodByCategory(search.str);
+                        ArrayList<Food> foods = res.searchFoodByCategory(search.str);
                         sendSearchFoodResponse(foods);
 
                     }
 
                     else if (search.by.equals("price")) {
-                        List<Food> foods = res.searchFoodByPriceRange(search.minScore, search.maxScore);
+                        ArrayList<Food> foods = res.searchFoodByPriceRange(search.minScore, search.maxScore);
                         sendSearchFoodResponse(foods);
                     }
                 }
@@ -141,7 +141,7 @@ public class ServerRequestThread implements Runnable {
                 else if (request instanceof RestaurantGetOrder) {
                     RestaurantGetOrder order = (RestaurantGetOrder) request;
 
-                    List<Order> orders = res.getOrders(order.resId);
+                    ArrayList<Order> orders = res.getOrders(order.resId);
                     System.out.println("orders: " + orders.size());
                     Response response = new Response("orders", orders);
                     nu.write(response);
@@ -152,7 +152,7 @@ public class ServerRequestThread implements Runnable {
         }
     }
 
-    private void sendSearchFoodResponse(List<Food> foods) throws Exception {
+    private void sendSearchFoodResponse(ArrayList<Food> foods) throws Exception {
         System.out.println("serch food response sending...");
         Response response = new Response("found", foods);
         if (foods.size() == 0)

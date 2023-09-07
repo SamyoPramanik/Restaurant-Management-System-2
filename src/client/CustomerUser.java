@@ -2,7 +2,6 @@ package client;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import requests.SearchFood;
@@ -48,7 +47,7 @@ public class CustomerUser {
                     SearchFoodThread.join();
 
                     if (response != null && response.getMessage().equals("found")) {
-                        List<Food> foods = (List) response.getData();
+                        ArrayList<Food> foods = (ArrayList<Food>) response.getData();
 
                         for (int i = 1; i <= foods.size(); i++)
                             System.out.println(i + ". " + foods.get(i - 1).getName());
@@ -62,7 +61,7 @@ public class CustomerUser {
         }
     }
 
-    private void showOrderFood(List<Food> foods) throws Exception {
+    private void showOrderFood(ArrayList<Food> foods) throws Exception {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -82,7 +81,7 @@ public class CustomerUser {
 
     }
 
-    private void orderFood(String foodNumbers, List<Food> foods) throws Exception {
+    private void orderFood(String foodNumbers, ArrayList<Food> foods) throws Exception {
         if (foodNumbers.length() == 0)
             return;
         String[] foodIntNumbers = foodNumbers.split(" ");

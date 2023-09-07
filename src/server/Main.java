@@ -6,7 +6,6 @@ import java.net.Socket;
 import threads.CheckUpdateThread;
 import threads.ServerRequestThread;
 import util.NetworkUtil;
-import util.SocketWrapper;
 
 public class Main {
     public static void main(String[] args) {

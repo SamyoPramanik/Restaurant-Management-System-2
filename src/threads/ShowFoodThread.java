@@ -26,8 +26,8 @@ public class ShowFoodThread implements Runnable {
                     Response response = customerUser.getResponse();
                     if (response.getMessage().equals("found")) {
                         Object data = response.getData();
-                        List<Food> foods = new ArrayList<Food>();
-                        foods = (List<Food>) data;
+                        ArrayList<Food> foods = new ArrayList<Food>();
+                        foods = (ArrayList<Food>) data;
 
                         for (int i = 1; i <= foods.size(); i++)
                             System.out.println(i + ". " + foods.get(i - 1).getName());
