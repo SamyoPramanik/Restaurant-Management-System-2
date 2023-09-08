@@ -1,0 +1,34 @@
+.leftNavbar {
+    -fx-background-color: #1E90FF;
+}
+
+.navButton {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-background-color: transparant;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-color: transparent;
+    -fx-font-weight: bold;
+    -fx-padding: 10 0 10 0;
+}
+
+.navButton:hover {
+    -fx-background-color: #0476e8;
+}
+
+.curButton {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-background-color: #0476e8;
+    -fx-border-width: 0 0 0 5;
+    -fx-border-color: #12599f;
+    -fx-font-weight: bold;
+    -fx-padding: 10 0 10 0;
+}
+
+.topNavButton {
+    -fx-background-color: transparant;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-color: transparent;
+    -fx-padding: 10 10 10 10;
+}

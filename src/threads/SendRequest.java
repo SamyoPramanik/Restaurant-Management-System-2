@@ -29,7 +29,7 @@ public class SendRequest implements Runnable {
             System.out.println("SendRequest");
             if (o instanceof CustomerUser) {
                 CustomerUser cu = (CustomerUser) o;
-                cu.sendRequest();
+                // cu.sendRequest();
             }
 
             else if (o instanceof RestaurantUser) {

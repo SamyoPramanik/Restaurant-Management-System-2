@@ -11,33 +11,34 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="319.0" prefWidth="352.0" stylesheets="@../css/auth.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AuthController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="352.0" stylesheets="@../css/auth.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AuthController">
    <children>
-      <VBox layoutX="127.0" layoutY="78.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="127.0" layoutY="78.0" prefHeight="398.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TabPane prefHeight="570.0" prefWidth="354.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab style="-fx-text-fill: red;" text="Login">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="293.0" prefWidth="352.0">
                            <children>
-                              <VBox layoutX="-1.0" layoutY="1.0" prefHeight="273.0" prefWidth="354.0" spacing="2.0">
+                              <VBox layoutX="-1.0" layoutY="1.0" prefHeight="332.0" prefWidth="354.0" spacing="2.0">
                                  <children>
+                                    <Label fx:id="loginMsg" alignment="CENTER" prefHeight="18.0" prefWidth="300.0" style="-fx-text-fill: red;" text="Label" visible="false" />
                                     <Label text="Username">
                                        <VBox.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </VBox.margin></Label>
-                                    <TextField fx:id="usernameLogin" promptText="Usrname" styleClass="textField" />
+                                    <TextField fx:id="usernameLogin" prefHeight="38.0" prefWidth="294.0" promptText="Usrname" styleClass="textField" />
                                     <Label text="Password">
                                        <VBox.margin>
                                           <Insets left="10.0" top="30.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <PasswordField fx:id="passwordLogin" promptText="Password" styleClass="passwordField" />
+                                    <PasswordField fx:id="passwordLogin" prefHeight="38.0" promptText="Password" styleClass="passwordField" />
                                     <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#resetLogin" prefHeight="40.0" prefWidth="200.0" text="Reset" />
-                                          <Button mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="200.0" text="Log in" />
+                                          <Button mnemonicParsing="false" onAction="#resetLogin" prefHeight="38.0" prefWidth="200.0" styleClass="buttons" text="Reset" />
+                                          <Button mnemonicParsing="false" onAction="#login" prefHeight="38.0" prefWidth="200.0" styleClass="buttons" text="Log in" />
                                        </children>
                                        <VBox.margin>
                                           <Insets top="20.0" />
@@ -56,29 +57,30 @@
                      <content>
                         <AnchorPane prefHeight="163.0" prefWidth="354.0">
                            <children>
-                              <VBox prefHeight="275.0" prefWidth="354.0" spacing="2.0">
+                              <VBox prefHeight="355.0" prefWidth="354.0" spacing="2.0">
                                  <children>
+                                    <Label fx:id="registerMsg" alignment="CENTER" prefHeight="18.0" prefWidth="296.0" style="-fx-text-fill: red;" text="Label" visible="false" />
                                     <Label text="Name">
                                        <VBox.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </VBox.margin></Label>
-                                    <TextField fx:id="registerName" promptText="Name" styleClass="textField" />
+                                    <TextField fx:id="registerName" prefHeight="38.0" promptText="Name" styleClass="textField" />
                                     <Label text="Username">
                                        <VBox.margin>
-                                          <Insets left="10.0" top="10.0" />
+                                          <Insets left="10.0" top="20.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="registerUsername" promptText="Username" styleClass="textField" />
+                                    <TextField fx:id="registerUsername" prefHeight="38.0" promptText="Username" styleClass="textField" />
                                     <Label text="Password">
                                        <VBox.margin>
-                                          <Insets left="10.0" top="10.0" />
+                                          <Insets left="10.0" top="20.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <PasswordField fx:id="registerPassword" promptText="Password" styleClass="passwordField" />
+                                    <PasswordField fx:id="registerPassword" prefHeight="38.0" promptText="Password" styleClass="passwordField" />
                                     <HBox alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="294.0" spacing="10.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#registerReset" prefHeight="40.0" prefWidth="200.0" text="Reset" />
-                                          <Button mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="200.0" text="Register" />
+                                          <Button mnemonicParsing="false" onAction="#registerReset" prefHeight="38.0" prefWidth="200.0" styleClass="buttons" text="Reset" />
+                                          <Button mnemonicParsing="false" onAction="#register" prefHeight="38.0" prefWidth="200.0" styleClass="buttons" text="Register" />
                                        </children>
                                        <VBox.margin>
                                           <Insets top="5.0" />

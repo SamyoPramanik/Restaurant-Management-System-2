@@ -47,8 +47,9 @@
 .passwordField {
     -fx-background-color: transparent;
     -fx-border-color: #1E90FF;
-
-    -fx-padding: 5;
+    -fx-min-height: 38;
+    -fx-max-height: 38;
+    -fx-padding: 5 10 5 10;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 }
@@ -58,19 +59,21 @@
     -fx-border-color: #12599f;
 }
 
-.button {
+.buttons {
     -fx-background-color: #1E90FF;
 
     -fx-font-weight: bold;
     -fx-padding: 5;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
+    -fx-min-height: 38;
+    -fx-max-height: 38;
 }
 
-.button:hover {
+.buttons:hover {
     -fx-background-color: #0476e8;
 }
 
-.button:pressed {
+.buttons:pressed {
     -fx-background-color: #12599f;
 }

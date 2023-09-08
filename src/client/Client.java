@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import controller.AuthController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import requests.*;
 import util.*;
 
@@ -16,77 +23,37 @@ public class Client {
     Customer customer;
     Restaurant restaurant;
     Admin admin;
+    Stage stage;
+    AuthController authController;
 
     public Client() {
         try {
             nu = new NetworkUtil("127.0.0.1", 3000);
-            while (true) {
-                System.out.println("1. Register");
-                System.out.println("2. Login");
-                System.out.println("3. Exit");
-                Scanner sc = new Scanner(System.in);
-                int choice = Integer.parseInt(sc.nextLine());
-                if (choice == 1)
-                    showRegister();
 
-                if (choice == 2)
-                    showLogin();
-            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/auth.fxml"));
+            Parent root = loader.load();
+
+            authController = loader.getController();
+            authController.setMain(this);
+
+            stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Login");
+            stage.setResizable(false);
+            stage.show();
 
         } catch (Exception e) {
-            System.out.println("Error: vulval " + e);
+            System.out.println("Error: vulval " + e.getMessage());
         }
     }
 
-    private void showLogin() throws Exception {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Enter username: ");
-        String username = sc.nextLine();
-
-        System.out.println("Enter password: ");
-        String password = sc.nextLine();
-
-        nu.write(new Login(username, password));
-        Response response = (Response) nu.read();
-
-        if (response.getMessage().equals("admin")) {
-            admin = (Admin) response.getData();
-            System.out.println(admin.getName());
-            showAdminHome(admin);
-        }
-
-        else if (response.getMessage().equals("customer")) {
-            int customer = (int) response.getData();
-            new CustomerUser(nu, customer);
-        }
-
-        else if (response.getMessage().equals("restaurant")) {
-            int restaurant = (int) response.getData();
-            new RestaurantUser(nu, restaurant);
-        }
-
-        else
-            System.out.println(response.getMessage());
-    }
-
-    private void showRegister() throws Exception {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Enter name: ");
-        String name = sc.nextLine();
-
-        System.out.println("Enter username: ");
-        String username = sc.nextLine();
-
-        System.out.println("Enter password: ");
-        String password = sc.nextLine();
-
+    public void registerRequest(String name, String username, String password)
+            throws Exception {
         nu.write(new Register(name, username, password, "customer"));
         Response response = (Response) nu.read();
         System.out.println(response.getMessage());
         int customer = (int) response.getData();
-
+        stage.close();
         new CustomerUser(nu, customer);
     }
 
@@ -98,7 +65,33 @@ public class Client {
 
     }
 
-    public static void main(String[] args) {
-        new Client();
+    public void loginRequest(String username, String password) throws Exception {
+        nu.write(new Login(username, password));
+        Response response = (Response) nu.read();
+
+        if (response.getMessage().equals("admin")) {
+            admin = (Admin) response.getData();
+            System.out.println(admin.getName());
+            stage.close();
+            showAdminHome(admin);
+        }
+
+        else if (response.getMessage().equals("customer")) {
+            int customer = (int) response.getData();
+            stage.close();
+            new CustomerUser(nu, customer);
+        }
+
+        else if (response.getMessage().equals("restaurant")) {
+            int restaurant = (int) response.getData();
+            stage.close();
+            new RestaurantUser(nu, restaurant);
+        }
+
+        else {
+            System.out.println(response.getMessage());
+            authController.showMsg(response.getMessage());
+        }
     }
+
 }
