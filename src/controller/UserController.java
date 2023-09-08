@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 
 public class UserController {
 
-    private CustomerHomeController main;
+    private Object main;
 
     @FXML
     private Label userName;
@@ -24,7 +24,7 @@ public class UserController {
         userType.setText(type);
     }
 
-    public void setMain(CustomerHomeController main) {
+    public void setMain(Object main) {
         this.main = main;
     }
 

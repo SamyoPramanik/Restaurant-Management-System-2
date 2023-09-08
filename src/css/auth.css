@@ -70,10 +70,22 @@
     -fx-max-height: 38;
 }
 
-.buttons:hover {
+.logoButtons {
+    -fx-background-color: #1E90FF;
+    -fx-font-size: 10;
+    -fx-padding: 5;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-min-height: 38;
+    -fx-max-height: 38;
+}
+
+.buttons:hover,
+.logoButtons:hover {
     -fx-background-color: #0476e8;
 }
 
-.buttons:pressed {
+.buttons:pressed,
+.logoButtons:pressed {
     -fx-background-color: #12599f;
 }

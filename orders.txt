@@ -1,0 +1,9 @@
+4,3 pc. Chicken Box,Big Box Meals,1,0
+4,Classic Chicken Sandwich Box,Big Box Meals,1,0
+4,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+4,A La Carte Thigh,A la Carte,1,0
+4,A La Carte Wing,A la Carte,1,0
+4,Large Popcorn Nuggets,A la Carte,1,0
+4,Chocolate Chocolate Chip Pancakes ,Buttermilk Pancakes and Crepes,2,0
+4,Mozza Sticks,Apps and Salad,2,0
+4,Appetizer Sampler,Apps and Salad,2,0

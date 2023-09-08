@@ -123,6 +123,16 @@ public class RestaurantManagement {
         return new Response("User added", customer);
     }
 
+    Customer searchCustomerById(int id) {
+        for (Customer c : customerList) {
+            if (c.getId() == id) {
+                return c;
+            }
+        }
+
+        return null;
+    }
+
     public Response searchUser(String username, String password) {
         for (User u : userList) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
@@ -288,10 +298,17 @@ public class RestaurantManagement {
         return order;
     }
 
-    public ArrayList<Order> getOrders(int resId) {
+    synchronized public ArrayList<Order> getOrders(int resId) {
         Restaurant r = searchRestaurantById(resId);
-        ArrayList<Order> orders = r.getOrders();
+        ArrayList<Order> orders = new ArrayList<>();
+        orders = r.getOrders();
         System.out.println("number of Orders in " + r.getName() + ": " + orders.size());
+        return orders;
+    }
+
+    synchronized public ArrayList<Order> getCustomerOrders(int customerId) {
+        Customer c = searchCustomerById(customerId);
+        ArrayList<Order> orders = c.getOrders();
         return orders;
     }
 
@@ -689,7 +706,7 @@ public class RestaurantManagement {
             if (line == null)
                 break;
 
-            String[] parts = line.split(",", -1);
+            String[] parts = line.split(",(?! )", -1);
 
             int id = Integer.parseInt(parts[0]);
             String name = parts[1];
@@ -752,7 +769,7 @@ public class RestaurantManagement {
             if (line == null)
                 break;
 
-            String[] parts = line.split(",", -1);
+            String[] parts = line.split(",(?! )", -1);
 
             int id = Integer.parseInt(parts[0]);
             String name = parts[1];
@@ -768,7 +785,7 @@ public class RestaurantManagement {
             if (line == null)
                 break;
 
-            String[] parts = line.split(",", -1);
+            String[] parts = line.split(",(?! )", -1);
 
             int customerId = Integer.parseInt(parts[0]);
             String foodName = parts[1];
@@ -790,7 +807,7 @@ public class RestaurantManagement {
                 }
         }
         br.close();
-        System.out.println("All customer loaded");
+        System.out.println("All orders loaded");
 
     }
 

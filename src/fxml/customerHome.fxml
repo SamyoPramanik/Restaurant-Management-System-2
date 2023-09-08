@@ -14,14 +14,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerHomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerHomeController">
    <children>
       <BorderPane layoutX="166.0" layoutY="109.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <VBox prefHeight="446.0" prefWidth="200.0" styleClass="leftNavbar" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" prefWidth="200.0" styleClass="curButton" text="Home" />
-                  <Button mnemonicParsing="false" prefWidth="200.0" styleClass="navButton" text="My Orders" />
+                  <Button mnemonicParsing="false" onAction="#showMyOrder" prefWidth="200.0" styleClass="navButton" text="My Orders" />
                   <Button mnemonicParsing="false" prefWidth="200.0" styleClass="navButton" text="Button" />
                </children>
             </VBox>
@@ -31,7 +31,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="532.0">
                      <children>
-                        <Button fx:id="curtButton" graphicTextGap="0.0" mnemonicParsing="false" styleClass="topNavButton" text="0">
+                        <Button fx:id="curtButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#showCart" styleClass="topNavButton" text="0">
                            <graphic>
                               <ImageView fitHeight="28.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -97,9 +97,9 @@
                      </padding>
                   </HBox>
                   <ListView fx:id="foodList" prefHeight="34.0" prefWidth="532.0" />
-                  <ScrollPane hbarPolicy="NEVER" prefHeight="249.0" prefWidth="532.0">
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="248.0" prefWidth="546.0">
                     <content>
-                        <VBox fx:id="foodList1" prefHeight="245.0" prefWidth="518.0" />
+                        <VBox fx:id="foodList1" prefHeight="246.0" prefWidth="525.0" />
                     </content>
                   </ScrollPane>
                </children>

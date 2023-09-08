@@ -1,3 +1,4 @@
-samyo,123456,admin,1
+admin,123456,admin,1
 kfc,kfc,restaurant,1
 soumik,123,customer,3
+samyo,samyo,customer,4

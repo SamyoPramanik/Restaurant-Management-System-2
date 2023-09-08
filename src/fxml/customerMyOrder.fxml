@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerMyOrderController">
+   <children>
+      <BorderPane layoutX="166.0" layoutY="109.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <VBox prefHeight="446.0" prefWidth="200.0" styleClass="leftNavbar" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#showHome" prefWidth="200.0" styleClass="navButton" text="Home" />
+                  <Button mnemonicParsing="false" prefWidth="200.0" styleClass="curButton" text="My Orders" />
+                  <Button mnemonicParsing="false" prefWidth="200.0" styleClass="navButton" text="Button" />
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="532.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#showuser" styleClass="topNavButton">
+                           <graphic>
+                              <ImageView fitHeight="28.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/user.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <ListView fx:id="orderlist" prefHeight="34.0" prefWidth="532.0" />
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="360.0" prefWidth="532.0">
+                    <content>
+                        <VBox fx:id="orderlist1" prefHeight="358.0" prefWidth="522.0" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+   <stylesheets>
+      <URL value="@../css/auth.css" />
+      <URL value="@../css/customerHome.css" />
+   </stylesheets>
+</AnchorPane>

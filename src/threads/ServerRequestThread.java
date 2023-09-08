@@ -146,6 +146,14 @@ public class ServerRequestThread implements Runnable {
                     Response response = new Response("orders", orders);
                     nu.write(response);
                 }
+
+                else if (request instanceof GetCustomerOrder) {
+                    GetCustomerOrder getCustomerOrder = (GetCustomerOrder) request;
+                    ArrayList<Order> orders = res.getCustomerOrders(getCustomerOrder.customerId);
+                    System.out.println("orders: " + orders.size());
+                    Response response = new Response(orders.size() + " orders found", orders);
+                    nu.write(response);
+                }
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);

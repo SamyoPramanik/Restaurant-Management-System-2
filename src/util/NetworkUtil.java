@@ -28,5 +28,6 @@ public class NetworkUtil {
 
     public void write(Object o) throws IOException, ClassNotFoundException {
         oos.writeUnshared(o);
+        oos.reset();
     }
 }

@@ -3,12 +3,13 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import util.Food;
 
 public class FoodController {
 
-    CustomerHomeController main;
+    Object main;
     Food food;
 
     @FXML
@@ -24,11 +25,22 @@ public class FoodController {
     private Label foodRestaurant;
 
     @FXML
+    public Button addButton;
+
+    @FXML
+    public Button removeButton;
+
+    @FXML
     void addToCart(Event event) {
-        main.addToCart(food);
+        ((CustomerHomeController) main).addToCart(food);
     }
 
-    public void setMain(CustomerHomeController main) {
+    @FXML
+    void removeFromCart(ActionEvent event) {
+        ((CartController) main).removeFromCart(food);
+    }
+
+    public void setMain(Object main) {
         this.main = main;
     }
 
@@ -36,7 +48,7 @@ public class FoodController {
         this.food = food;
         foodName.setText(name);
         foodCategory.setText(category);
-        foodPrice.setText("$ " + price);
+        foodPrice.setText("$" + price);
         foodRestaurant.setText(restaurant);
     }
 

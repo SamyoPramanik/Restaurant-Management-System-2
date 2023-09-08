@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import client.CustomerUser;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -26,7 +27,6 @@ import util.Food;
 public class CustomerHomeController implements Initializable {
 
     private CustomerUser main;
-    public ArrayList<Food> cart = new ArrayList<>();
     public ArrayList<Food> foods = null;
 
     @FXML
@@ -57,12 +57,12 @@ public class CustomerHomeController implements Initializable {
     private ChoiceBox<String> searchFoodBy;
 
     @FXML
-    private Button curtButton;
+    public Button curtButton;
 
     @FXML
     void searchFood(Event event) {
         try {
-            // new Thread(() -> searchFoodThread()).start();
+            System.out.println("food search length: " + foodName.getText().length());
             searchFoodThread();
 
         } catch (Exception e) {
@@ -72,25 +72,32 @@ public class CustomerHomeController implements Initializable {
 
     @FXML
     void showuser(Event event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
-        Parent root = loader.load();
-        UserController userController = loader.getController();
-        userController.setMain(this);
-        userController.set(main.customer.getName(), "Customer");
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("User");
-        stage.setResizable(false);
-        stage.show();
+        main.shwoUser();
     }
 
-    synchronized void searchFoodThread() {
+    @FXML
+    void showMyOrder(ActionEvent event) {
+        main.showCustomerMyOrder();
+    }
+
+    @FXML
+    void showCart(ActionEvent event) {
+        main.showCustomerCart();
+    }
+
+    void searchFoodThread() {
         try {
             int idx = searchFoodBy.getSelectionModel().getSelectedIndex();
-            if (idx == 0)
-                foods = main.searchFood(foodName.getText(), "name");
-            else if (idx == 1)
-                foods = main.searchFood(foodName.getText(), "category");
+            if (idx == 0) {
+                if (foodName.getText().length() >= 2)
+                    foods = main.searchFood(foodName.getText(), "name");
+            }
+
+            else if (idx == 1) {
+                if (foodName.getText().length() >= 2)
+                    foods = main.searchFood(foodName.getText(), "category");
+            }
+
             else if (idx == 2) {
                 try {
                     double min = Double.parseDouble(minPrice.getText());
@@ -110,11 +117,16 @@ public class CustomerHomeController implements Initializable {
                 Pane pane = loader.load();
                 FoodController foodController = loader.getController();
                 foodController.setMain(this);
-                foodController.set(food, food.getName(), food.getCategory(), food.getPrice() + "",
+
+                foodController.removeButton.setVisible(false);
+                foodController.removeButton.setManaged(false);
+
+                foodController.set(food, food.getName(), food.getCategory(), food.getPrice()
+                        + "",
                         food.getResName());
                 foodList1.getChildren().add(pane);
-                System.out.println("list updated");
             }
+            System.out.println("list updated");
 
         } catch (Exception e) {
             System.out.println("Error in searchFood UI: " + e);
@@ -122,8 +134,9 @@ public class CustomerHomeController implements Initializable {
     }
 
     public void addToCart(Food food) {
-        cart.add(0, food);
-        curtButton.setText(cart.size() + "");
+        main.cart.add(0, food);
+        main.totalCost += food.getPrice();
+        curtButton.setText(main.cart.size() + "");
 
     }
 

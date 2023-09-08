@@ -4,11 +4,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import controller.CartController;
 import controller.CustomerHomeController;
+import controller.CustomerMyOrderController;
+import controller.UserController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import requests.GetCustomerOrder;
 import requests.SearchFood;
 import threads.*;
 import util.*;
@@ -19,11 +24,17 @@ public class CustomerUser {
     volatile Response response;
     volatile boolean isOrderCheckingRunning;
     CustomerHomeController controller;
+    CartController cartController;
+    public double totalCost = 0;
+    Stage stg;
+    Stage cartStage;
+    volatile public ArrayList<Food> cart = new ArrayList<>();
 
     public CustomerUser(NetworkUtil nu, Customer customer) throws ClassNotFoundException, IOException {
         this.nu = nu;
         this.customer = customer;
         isOrderCheckingRunning = true;
+        stg = new Stage();
         showCustomerHome();
     }
 
@@ -65,12 +76,94 @@ public class CustomerUser {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/customerHome.fxml"));
             Parent root = loader.load();
             controller = loader.getController();
+
             controller.setMain(this);
-            Stage stg = new Stage();
+            controller.curtButton.setText(cart.size() + "");
+
             stg.setScene(new Scene(root));
+            stg.setResizable(false);
             stg.show();
         } catch (Exception e) {
             System.out.println("Error: in customerHome " + e);
+        }
+    }
+
+    public void showCustomerMyOrder() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/customerMyOrder.fxml"));
+            Parent root = loader.load();
+            CustomerMyOrderController controller = loader.getController();
+
+            nu.write(new GetCustomerOrder(customer.getId()));
+            Object o = nu.read();
+            Response response = (Response) o;
+            System.out.println(response.getMessage());
+            ArrayList<Order> orders = (ArrayList<Order>) response.getData();
+            controller.setMain(this);
+            controller.loadOrders(orders);
+
+            stg.setScene(new Scene(root));
+            stg.setResizable(false);
+            stg.show();
+        } catch (Exception e) {
+            System.out.println("Error: in customer myorder " + e);
+        }
+
+    }
+
+    public void showCustomerCart() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cart.fxml"));
+            Parent root = loader.load();
+            cartController = loader.getController();
+
+            cartController.setMain(this);
+            cartController.loadCart(cart);
+            cartController.orderCount.setText("Cart: " + cart.size() + " items");
+            cartController.totalCost.setText("Total cost: $" + totalCost);
+
+            cartStage = new Stage();
+            cartStage.setScene(new Scene(root));
+            cartStage.setTitle("Cart");
+            cartStage.setResizable(false);
+            cartStage.initModality(Modality.APPLICATION_MODAL);
+            cartStage.showAndWait();
+
+        } catch (Exception e) {
+            System.out.println("Error: in customer myorder " + e);
+        }
+    }
+
+    public void shwoUser() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
+            Parent root = loader.load();
+            UserController userController = loader.getController();
+
+            userController.setMain(this);
+            userController.set(customer.getName(), "Customer");
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("User");
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Error: in customerHome " + e);
+        }
+    }
+
+    public void removeFromCart(Food food) {
+        try {
+            cart.remove(food);
+            totalCost -= food.getPrice();
+            cartController.orderCount.setText("Cart: " + cart.size() + " items");
+            cartController.totalCost.setText("Total cost: $" + totalCost);
+            controller.curtButton.setText(cart.size() + "");
+            cartController.loadCart(cart);
+        } catch (Exception e) {
+            System.out.println("Error: in removeFromCart " + e);
         }
     }
 
@@ -130,43 +223,22 @@ public class CustomerUser {
         return null;
     }
 
-    private void showOrderFood(ArrayList<Food> foods) throws Exception {
-        Scanner sc = new Scanner(System.in);
+    public void orderFood() throws Exception {
+        try {
+            if (cart.size() > 0) {
+                isOrderCheckingRunning = false;
+                totalCost = 0;
+                controller.curtButton.setText("0");
+                cartStage.close();
 
-        while (true) {
-            System.out.println("1. Order Food");
-            System.out.println("2. Back");
-            int choice = Integer.parseInt(sc.nextLine());
-
-            if (choice == 1) {
-                System.out.println("Enter Food Numbers to order seperated by space: ");
-                String foodNumbers = sc.nextLine();
-                orderFood(foodNumbers, foods);
+                for (Food food : cart) {
+                    nu.write(new Order(customer.getId(), food, false));
+                    Object o = nu.read();
+                }
+                cart.clear();
             }
-
-            else
-                return;
+        } catch (Exception e) {
+            System.out.println("Error: in orderFood " + e);
         }
-
     }
-
-    private void orderFood(String foodNumbers, ArrayList<Food> foods) throws Exception {
-        if (foodNumbers.length() == 0)
-            return;
-        String[] foodIntNumbers = foodNumbers.split(" ");
-
-        for (String number : foodIntNumbers) {
-            int foodNumber = Integer.parseInt(number);
-            Food food = foods.get(foodNumber - 1);
-            nu.write(new Order(customer.getId(), food, false));
-
-            isOrderCheckingRunning = false;
-            SendRequest sendRequest = new SendRequest(this);
-            sendRequest.join();
-
-            System.out.println(response.getMessage());
-        }
-
-    }
-
 }
