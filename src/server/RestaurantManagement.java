@@ -109,11 +109,18 @@ public class RestaurantManagement {
     }
 
     public Response insertUser(String name, String username, String password, String type) {
+        for (User u : userList) {
+            if (u.getUsername().equals(username)) {
+                return new Response("Username already exists", null);
+            }
+        }
+
         int id = userList.size() + 1;
         userList.add(new User(username, password, type, id));
-        customerList.add(new Customer(id, name));
+        Customer customer = new Customer(id, name);
+        customerList.add(customer);
         increaseUpdate();
-        return new Response("User added", id);
+        return new Response("User added", customer);
     }
 
     public Response searchUser(String username, String password) {
@@ -124,7 +131,7 @@ public class RestaurantManagement {
                 if (u.getType().equals("customer")) {
                     for (Customer c : customerList) {
                         if (c.getId() == u.getId()) {
-                            Response response = new Response("customer", c.getId());
+                            Response response = new Response("customer", c);
                             return response;
                         }
                     }

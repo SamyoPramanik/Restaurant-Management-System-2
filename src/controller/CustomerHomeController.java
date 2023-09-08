@@ -1,24 +1,33 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import client.CustomerUser;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import util.Food;
 
 public class CustomerHomeController implements Initializable {
 
     private CustomerUser main;
-    public ArrayList<Food> cart;
+    public ArrayList<Food> cart = new ArrayList<>();
+    public ArrayList<Food> foods = null;
 
     @FXML
     private HBox byName;
@@ -42,21 +51,41 @@ public class CustomerHomeController implements Initializable {
     private VBox foodInfo;
 
     @FXML
+    private VBox foodList1;
+
+    @FXML
     private ChoiceBox<String> searchFoodBy;
+
+    @FXML
+    private Button curtButton;
 
     @FXML
     void searchFood(Event event) {
         try {
-            new Thread(() -> searchFoodThread()).start();
+            // new Thread(() -> searchFoodThread()).start();
+            searchFoodThread();
 
         } catch (Exception e) {
             System.out.println("Error in searchFood UI: " + e);
         }
     }
 
-    void searchFoodThread() {
+    @FXML
+    void showuser(Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
+        Parent root = loader.load();
+        UserController userController = loader.getController();
+        userController.setMain(this);
+        userController.set(main.customer.getName(), "Customer");
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("User");
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    synchronized void searchFoodThread() {
         try {
-            ArrayList<Food> foods = null;
             int idx = searchFoodBy.getSelectionModel().getSelectedIndex();
             if (idx == 0)
                 foods = main.searchFood(foodName.getText(), "name");
@@ -73,12 +102,29 @@ public class CustomerHomeController implements Initializable {
                 }
             }
             foodList.getItems().clear();
-            for (Food food : foods)
+            foodList1.getChildren().clear();
+            for (Food food : foods) {
                 foodList.getItems().add(food.getName());
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/food.fxml"));
+                Pane pane = loader.load();
+                FoodController foodController = loader.getController();
+                foodController.setMain(this);
+                foodController.set(food, food.getName(), food.getCategory(), food.getPrice() + "",
+                        food.getResName());
+                foodList1.getChildren().add(pane);
+                System.out.println("list updated");
+            }
 
         } catch (Exception e) {
             System.out.println("Error in searchFood UI: " + e);
         }
+    }
+
+    public void addToCart(Food food) {
+        cart.add(0, food);
+        curtButton.setText(cart.size() + "");
+
     }
 
     public void setMain(CustomerUser main) {

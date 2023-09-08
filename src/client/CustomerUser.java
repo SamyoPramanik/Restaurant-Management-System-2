@@ -15,14 +15,14 @@ import util.*;
 
 public class CustomerUser {
     NetworkUtil nu;
-    int id;
+    public Customer customer;
     volatile Response response;
     volatile boolean isOrderCheckingRunning;
     CustomerHomeController controller;
 
-    public CustomerUser(NetworkUtil nu, int id) throws ClassNotFoundException, IOException {
+    public CustomerUser(NetworkUtil nu, Customer customer) throws ClassNotFoundException, IOException {
         this.nu = nu;
-        this.id = id;
+        this.customer = customer;
         isOrderCheckingRunning = true;
         showCustomerHome();
     }
@@ -158,7 +158,7 @@ public class CustomerUser {
         for (String number : foodIntNumbers) {
             int foodNumber = Integer.parseInt(number);
             Food food = foods.get(foodNumber - 1);
-            nu.write(new Order(id, food, false));
+            nu.write(new Order(customer.getId(), food, false));
 
             isOrderCheckingRunning = false;
             SendRequest sendRequest = new SendRequest(this);

@@ -51,10 +51,18 @@ public class Client {
             throws Exception {
         nu.write(new Register(name, username, password, "customer"));
         Response response = (Response) nu.read();
-        System.out.println(response.getMessage());
-        int customer = (int) response.getData();
-        stage.close();
-        new CustomerUser(nu, customer);
+
+        if (response.getMessage().equals("User added")) {
+            System.out.println(response.getMessage());
+            Customer customer = (Customer) response.getData();
+            stage.close();
+            new CustomerUser(nu, customer);
+        }
+
+        else {
+            System.out.println(response.getMessage());
+            authController.showRegMsg(response.getMessage());
+        }
     }
 
     public void showAdminHome(Admin admin) {
@@ -77,7 +85,7 @@ public class Client {
         }
 
         else if (response.getMessage().equals("customer")) {
-            int customer = (int) response.getData();
+            Customer customer = (Customer) response.getData();
             stage.close();
             new CustomerUser(nu, customer);
         }
@@ -90,7 +98,7 @@ public class Client {
 
         else {
             System.out.println(response.getMessage());
-            authController.showMsg(response.getMessage());
+            authController.showLoginMsg(response.getMessage());
         }
     }
 

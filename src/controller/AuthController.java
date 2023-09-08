@@ -49,12 +49,12 @@ public class AuthController {
         try {
             if (registerName.getText().equals("") || registerUsername.getText().equals("")
                     || registerPassword.getText().equals("")) {
-                showMsg("Please fill up all the fields");
+                showRegMsg("Please fill up all the fields");
                 return;
             }
             String name = registerName.getText();
-            String username = usernameLogin.getText();
-            String password = passwordLogin.getText();
+            String username = registerUsername.getText();
+            String password = registerPassword.getText();
             main.registerRequest(name, username, password);
 
         } catch (Exception e) {
@@ -79,9 +79,14 @@ public class AuthController {
         this.main = main;
     }
 
-    public void showMsg(String msg) {
+    public void showLoginMsg(String msg) {
         loginMsg.setText(msg);
         loginMsg.setVisible(true);
+    }
+
+    public void showRegMsg(String msg) {
+        registerMsg.setText(msg);
+        registerMsg.setVisible(true);
     }
 
 }
