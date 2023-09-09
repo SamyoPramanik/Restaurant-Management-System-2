@@ -47,11 +47,6 @@ public class CustomerMyOrderController {
                 FoodController foodController = loader.getController();
                 foodController.setMain(this);
 
-                foodController.removeButton.setVisible(false);
-                foodController.removeButton.setManaged(false);
-                foodController.addButton.setVisible(false);
-                foodController.addButton.setManaged(false);
-
                 Food food = order.getFood();
 
                 foodController.set(food, food.getName(), food.getCategory(), food.getPrice()

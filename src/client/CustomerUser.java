@@ -187,8 +187,6 @@ public class CustomerUser {
         if (response != null && response.getMessage().equals("found")) {
             ArrayList<Food> foods = (ArrayList<Food>) response.getData();
 
-            for (int i = 1; i <= foods.size(); i++)
-                System.out.println(i + ". " + foods.get(i - 1).getName());
             // showOrderFood(foods);
             return foods;
         }
@@ -215,8 +213,6 @@ public class CustomerUser {
         if (response != null && response.getMessage().equals("found")) {
             ArrayList<Food> foods = (ArrayList<Food>) response.getData();
 
-            for (int i = 1; i <= foods.size(); i++)
-                System.out.println(i + ". " + foods.get(i - 1).getName());
             // showOrderFood(foods);
             return foods;
         }

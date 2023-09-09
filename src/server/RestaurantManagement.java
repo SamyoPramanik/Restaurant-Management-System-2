@@ -291,7 +291,7 @@ public class RestaurantManagement {
     public int getNewOrders(int resId) {
         Restaurant r = searchRestaurantById(resId);
         int order = r.getNewOrderCount();
-        r.resetOrder();
+        // r.resetOrder();
 
         System.out.println("number of new Orders in " + r.getName() + ": " + order);
 

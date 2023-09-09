@@ -1,8 +1,12 @@
 package controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import util.Food;
@@ -31,6 +35,9 @@ public class FoodController {
     public Button removeButton;
 
     @FXML
+    private Button editButton;
+
+    @FXML
     void addToCart(Event event) {
         ((CustomerHomeController) main).addToCart(food);
     }
@@ -50,6 +57,36 @@ public class FoodController {
         foodCategory.setText(category);
         foodPrice.setText("$" + price);
         foodRestaurant.setText(restaurant);
-    }
 
+        if (main instanceof CartController) {
+            addButton.setVisible(false);
+            addButton.setManaged(false);
+            editButton.setVisible(false);
+            editButton.setManaged(false);
+        }
+
+        else if (main instanceof CustomerHomeController) {
+            System.out.println("CustomerHomeController button hide");
+            removeButton.setVisible(false);
+            removeButton.setManaged(false);
+            editButton.setVisible(false);
+            editButton.setManaged(false);
+        }
+
+        else if (main instanceof CustomerMyOrderController) {
+            removeButton.setVisible(false);
+            removeButton.setManaged(false);
+            addButton.setVisible(false);
+            addButton.setManaged(false);
+            editButton.setVisible(false);
+            editButton.setManaged(false);
+        }
+
+        else if (main instanceof RestaurantHomeController) {
+            removeButton.setVisible(false);
+            removeButton.setManaged(false);
+            addButton.setVisible(false);
+            addButton.setManaged(false);
+        }
+    }
 }

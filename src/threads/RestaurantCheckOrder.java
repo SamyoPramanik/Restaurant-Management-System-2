@@ -23,7 +23,7 @@ public class RestaurantCheckOrder implements Runnable {
     @Override
     public void run() {
         try {
-            ru.showNewOrder();
+            ru.checkNewOrder();
 
         } catch (Exception e) {
             System.out.println("Error: in Restaurant CheckOrder " + e);

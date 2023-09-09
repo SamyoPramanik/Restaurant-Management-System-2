@@ -1,3 +1,31 @@
+3,Chicken and Pancakes,Combo Meals,2,0
+3,Classic Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,Chocolate Chip Cookie,Bakery,3,0
+3,Classic Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,Chocolate Chip Cookie,Bakery,3,0
+3,3 pc. Chicken Box,Big Box Meals,1,0
+3,Classic Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,3 pc. Chicken Box,Big Box Meals,1,0
+3,Classic Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,3 pc. Chicken Box,Big Box Meals,1,0
+3,Classic Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,3 pc. Chicken Box,Big Box Meals,1,0
+3,Classic Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,3 pc. Chicken Box,Big Box Meals,1,0
+3,Classic Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,3 pc. Chicken Box,Big Box Meals,1,0
+3,Classic Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+3,3 pc. Chicken Box,Big Box Meals,1,0
+3,Classic Chicken Sandwich Box,Big Box Meals,1,0
+3,Spicy Chicken Sandwich Box,Big Box Meals,1,0
 4,3 pc. Chicken Box,Big Box Meals,1,0
 4,Classic Chicken Sandwich Box,Big Box Meals,1,0
 4,Spicy Chicken Sandwich Box,Big Box Meals,1,0
@@ -7,3 +35,12 @@
 4,Chocolate Chocolate Chip Pancakes ,Buttermilk Pancakes and Crepes,2,0
 4,Mozza Sticks,Apps and Salad,2,0
 4,Appetizer Sampler,Apps and Salad,2,0
+4,Chicken Little,Signature Sandwiches,1,0
+4,Chicken Littles Combo,Signature Sandwiches,1,0
+4,Classic Chicken Sandwich Combo,Signature Sandwiches,1,0
+4,3 pc. Chicken Box,Big Box Meals,1,0
+4,Classic Chicken Sandwich Box,Big Box Meals,1,0
+4,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+4,Classic Chicken Sandwich Box,Big Box Meals,1,0
+4,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+4,Chocolate Chip Cookie,Bakery,3,0

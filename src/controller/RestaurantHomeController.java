@@ -1,11 +1,10 @@
 package controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import client.CustomerUser;
+import client.RestaurantUser;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -14,21 +13,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import util.Food;
 
-public class CustomerHomeController implements Initializable {
+public class RestaurantHomeController implements Initializable {
 
-    private CustomerUser main;
-    public ArrayList<Food> foods = null;
-
+    private ArrayList<Food> foods = null;
+    private RestaurantUser main;
     @FXML
     private HBox byName;
 
@@ -36,7 +35,13 @@ public class CustomerHomeController implements Initializable {
     private HBox byPrice;
 
     @FXML
+    private VBox foodInfo;
+
+    @FXML
     private ListView<String> foodList;
+
+    @FXML
+    private VBox foodList1;
 
     @FXML
     private TextField foodName;
@@ -48,21 +53,17 @@ public class CustomerHomeController implements Initializable {
     private TextField minPrice;
 
     @FXML
-    private VBox foodInfo;
-
-    @FXML
-    private VBox foodList1;
+    public Label newOrderCount;
 
     @FXML
     private ChoiceBox<String> searchFoodBy;
 
     @FXML
-    public Button curtButton;
-
-    @FXML
     void searchFood(Event event) {
         try {
             System.out.println("food search length: " + foodName.getText().length());
+            System.out.println("is new order checking: " + main.isNewOrderChecking);
+            main.isNewOrderChecking = false;
 
             new Thread(() -> {
                 searchFoodThread();
@@ -75,22 +76,23 @@ public class CustomerHomeController implements Initializable {
     }
 
     @FXML
-    void showuser(Event event) throws IOException {
-        main.shwoUser();
-    }
-
-    @FXML
     void showMyOrder(ActionEvent event) {
-        main.showCustomerMyOrder();
+
     }
 
     @FXML
-    void showCart(ActionEvent event) {
-        main.showCustomerCart();
+    void showuser(ActionEvent event) {
+
     }
 
-    void searchFoodThread() {
+    @FXML
+    void showAddNewFood(ActionEvent event) {
+        main.showAddNewFood();
+    }
+
+    synchronized void searchFoodThread() {
         try {
+            System.out.println("food search length: " + foodName.getText().length());
             int idx = searchFoodBy.getSelectionModel().getSelectedIndex();
             if (idx == 0) {
                 if (foodName.getText().length() > 2)
@@ -125,7 +127,7 @@ public class CustomerHomeController implements Initializable {
                     int i = 0;
                     for (Food food : foods) {
                         foodList.getItems().add(food.getName());
-                        System.out.println(++i + ". " + food.getName());
+                        // System.out.println(++i + ". " + food.getName());
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/food.fxml"));
                         Pane pane = loader.load();
@@ -138,24 +140,20 @@ public class CustomerHomeController implements Initializable {
                         foodList1.getChildren().add(pane);
                     }
                 } catch (Exception e) {
-                    System.out.println(e);
+                    System.out.println("Error in updating restarurant: " + e);
                 }
             });
             System.out.println("list updated");
+
+            main.isNewOrderChecking = true;
+            notifyAll();
 
         } catch (Exception e) {
             System.out.println("Error in searchFood UI: " + e);
         }
     }
 
-    public void addToCart(Food food) {
-        main.cart.add(0, food);
-        main.totalCost += food.getPrice();
-        curtButton.setText(main.cart.size() + "");
-
-    }
-
-    public void setMain(CustomerUser main) {
+    public void setMain(RestaurantUser main) {
         this.main = main;
     }
 
