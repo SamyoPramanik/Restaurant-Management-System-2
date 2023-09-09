@@ -52,7 +52,6 @@
 4,Beverages,Medium Sweet Iced Tea,1.69
 4,Beverages,Honest Kids Organic Apple Juice Drink,2.29
 4,Beverages,Chocolate Milk,2.59
-4,Beverages,Milk,2.59
 4,Beverages,Dasani Bottled Water,2.69
 4,Beverages,Medium Minute Maid Orange Juice,3.49
 4,Beverages,Medium Root Beer,1.69
@@ -79,12 +78,9 @@
 3,Breakfast,Bacon and Gruyère Egg Bites,5.75
 3,Breakfast,Bacon, Sausage and Egg Wrap,7.25
 3,Breakfast,Impossible™ Breakfast Sandwich,6.25
-3,Breakfast,Avocado Spread,1.45
 3,Breakfast,Sausage, Cheddar and Egg Sandwich,5.15
 4,Breakfast,Big Breakfast with Hotcakes,7.59
 4,Breakfast,Hotcakes and Sausage,6.19
-4,Breakfast,Hotcakes,4.79
-4,Breakfast,Big Breakfast,6.19
 2,Burgers and Chicken Sandwiches,Mega Monster Cheeseburger,14.39
 2,Buttermilk Pancakes and Crepes,Chocolate Chocolate Chip Pancakes ,11.99
 2,Buttermilk Pancakes and Crepes,Strawberry Banana Pancakes,11.99
@@ -111,7 +107,6 @@
 3,Cold Coffees,Iced Coffee,3.95
 3,Cold Coffees,Iced Coffee with Milk,3.95
 3,Cold Coffees,Iced Chocolate Almondmilk Shaken Espresso,5.95
-3,Cold Coffees,Starbucks Cold Brew Coffee,4.55
 3,Cold Coffees,Iced Brown Sugar Oatmilk Shaken Espresso,5.95
 3,Cold Coffees,Iced Toasted Vanilla Oatmilk Shaken Espresso,5.95
 3,Cold Coffees,Iced Flat White,5.45
@@ -128,12 +123,10 @@
 3,Cold Drinks,Pink Drink,5.35
 3,Cold Drinks,Mango Dragonfruit Starbucks Refreshers Beverage,4.55
 3,Cold Drinks,Dragon Drink,5.35
-3,Cold Drinks,Lemonade,2.65
 3,Cold Drinks,Tree Top Apple Juice Box,2.65
 3,Cold Drinks,Blended Strawberry Lemonade,4.35
 3,Cold Drinks,Evolution Fresh Organic Vital Berry,5.75
 3,Cold Drinks,Starbucks BAYA™ Energy Mango Guava,3.75
-3,Cold Drinks,Milk,3.15
 3,Cold Drinks,Horizon Chocolate Organic Milk,2.95
 3,Cold Drinks,Galvanina Sparkling Water,2.85
 3,Cold Drinks,Strawberry Açaí Lemonade Starbucks Refreshers Beverage,5.35
@@ -146,7 +139,6 @@
 2,Combo Meals,Chicken and Pancakes,13.55
 4,Combo Meals,Sausage Egg McMuffin Meal,8.79
 4,Combo Meals,Sausage McMuffin Meal,6.59
-4,Combo Meals,Egg McMuffin Meal,8.79
 4,Combo Meals,Sausage Egg Biscuit Meal,9.09
 4,Combo Meals,Bacon Egg Cheese McMuffin Meal,10.59
 4,Combo Meals,2 Sausage Burrito Meal,9.09
@@ -157,10 +149,8 @@
 2,Entrées,Buffalo Crispy Chicken Strips and Fries,12.35
 2,Entrées,Boneless BBQ Crispy Chicken Strips and Fries,12.35
 2,Entrées,Buttermilk Crispy Chicken Strips and Fries,11.15
-2,Entrées,Sirloin Steak Tips,15.59
 2,Entrées,All-Natural Roasted Turkey,13.55
 2,Entrées,Grilled Tilapia,12.71
-2,Entrées,Buttermilk Crispy Chicken,13.19
 2,Entrées,Cheesy Chicken Bacon Ranch,14.39
 1,Family Bucket Meals,10 Piece Feast,36.0
 1,Family Bucket Meals,8 pc. Family Bucket Meal,34.79
@@ -172,8 +162,6 @@
 2,Family Feasts,Breakfast Family Feast with French Toast,35.99
 2,Family Feasts,Pancake Creations Family Feast with Bacon,35.99
 2,Family Feasts,Breakfast Family Feast with Pancakes,35.99
-2,Family Feasts,Lunch/Dinner Beverage Bundle,9.59
-2,Family Feasts,Breakfast Beverage Bundle,7.19
 2,Family Feasts,Steakburgers and Chicken Sandwiches Family Feast,35.99
 1,Fill Ups,1 pc. Breast Fill Up,10.79
 1,Fill Ups,3 pc. Crispy Tenders Fill Up,11.99
@@ -194,22 +182,10 @@
 3,Hot Coffees,Coffee Traveler – Decaf Pike Place Roast,22.95
 3,Hot Coffees,Coffee Traveler – Pike Place Roast,22.95
 3,Hot Coffees,Coffee Traveler - Veranda Blend,22.95
-3,Hot Coffees,White Chocolate Mocha,5.65
-3,Hot Coffees,Caffè Mocha,4.85
-3,Hot Coffees,Caramel Macchiato,4.95
 3,Hot Coffees,Espresso Macchiato,2.95
-3,Hot Coffees,Starbucks Blonde Vanilla Latte,5.15
-3,Hot Coffees,Cinnamon Dolce Latte,5.65
-3,Hot Coffees,Caffè Latte,4.25
-3,Hot Coffees,Honey Almondmilk Flat White,5.95
-3,Hot Coffees,Flat White,4.95
 3,Hot Coffees,Cappuccino,4.25
-3,Hot Coffees,Decaf Pike Place Roast,2.95
-3,Hot Coffees,Pike Place Roast,2.95
 3,Hot Coffees,Featured Starbucks Dark Roast Coffee,2.95
 3,Hot Coffees,Caffè Misto,3.75
-3,Hot Coffees,Veranda Blend,2.95
-3,Hot Coffees,Caffè Americano,3.15
 3,Hot Drinks,Vanilla Crème,2.65
 3,Hot Drinks,Steamed Milk,2.25
 3,Hot Drinks,Cinnamon Dolce Crème,4.85
@@ -225,14 +201,12 @@
 3,Iced Teas,Iced Passion Tango Tea Lemonade,3.75
 3,Iced Teas,Iced Passion Tango™ Tea,3.45
 3,Iced Teas,Iced Peach Green Tea Lemonade,3.95
-3,Iced Teas,Iced Peach Green Tea,3.75
 3,Iced Teas,Iced Green Tea Lemonade,3.75
 3,Iced Teas,Iced Black Tea,3.45
 3,Iced Teas,Iced Matcha Tea Latte,4.95
 3,Iced Teas,Iced Matcha Lemonade,3.75
 3,Iced Teas,Iced Chai Tea Latte,4.95
 3,Iced Teas,Iced Black Tea Lemonade,3.75
-3,Iced Teas,Iced Green Tea,3.45
 2,Kids Menu,Jr. Chicken and Waffles,7.55
 2,Kids Menu,Jr. Chicken Strips Dinner,7.79
 2,Kids Menu,KRAFT Macaroni and Cheese,5.99
@@ -246,13 +220,11 @@
 3,Lunch,Crispy Grilled Cheese on Sourdough,7.25
 3,Lunch,Chicken and Bacon on Brioche,7.95
 3,Lunch,Turkey, Provolone and Pesto on Ciabatta,7.75
-3,Lunch,Avocado Spread,1.45
 3,Lunch,Tomato and Mozzarella on Focaccia,7.25
 3,Lunch,Ham and Swiss on Baguette,7.95
 4,McCafé,Medium Sugar-Free Vanilla Latte,4.99
 4,McCafé,Medium Premium Roast Coffee,1.69
 4,McCafé,Medium Decaf Coffee,1.69
-4,McCafé,Medium Hot Tea,1.69
 4,McCafé,Medium Iced Coffee,2.99
 4,McCafé,Medium Iced Caramel Coffee,2.99
 4,McCafé,Medium Iced Hazelnut Coffee,2.99
@@ -286,7 +258,6 @@
 4,McCafé,Medium Iced Caramel Mocha,4.99
 4,McCafé,Medium Iced Mocha,4.99
 4,McCafé,Medium Caramel Mocha,4.99
-4,McCafé,Medium Mocha,4.99
 4,McCafé Bakery,Strawberry and Crème Pie,1.99
 4,McCafé Bakery,Apple Pie,1.79
 4,McCafé Bakery,13 Cookie Tote,8.79
@@ -295,17 +266,8 @@
 4,McCafé Bakery,McCafé Cinnamon Roll,3.89
 4,McCafé Bakery,McCafé Apple Fritter,3.49
 2,Milkshakes,House-Made Milkshakes,5.99
-4,Most Popular,McCafé Cinnamon Roll,3.89
-4,Most Popular,Medium French Vanilla Latte,4.99
-4,Most Popular,Medium Iced Coffee,2.99
-4,Most Popular,Sausage Egg Cheese McGriddle Meal,9.49
-4,Most Popular,Sausage Egg McMuffin Meal,8.79
-4,Most Popular,Sausage Egg McMuffin,5.29
-4,Most Popular,Bacon Egg Cheese Biscuit Meal,9.09
 4,Most Popular,Hash Browns,2.59
-4,Most Popular,Big Breakfast with Hotcakes,7.59
 3,Oatmeal and Yogurt,Rolled and Steel-Cut Oatmeal with Blueberries,4.65
-3,Oatmeal and Yogurt,Rolled and Steel-Cut Oatmeal,4.35
 2,Omelettes,Spicy Poblano Omelette,15.11
 2,Omelettes,Colorado Omelette,15.35
 2,Omelettes,Chicken Fajita Omelette,15.11
@@ -319,7 +281,6 @@
 1,Sides,Cole Slaw,3.83
 1,Sides,Whole Kernel Corn,3.83
 1,Sides,Mac and Cheese,3.83
-1,Sides,Gravy,3.59
 1,Sides,2 Biscuits,2.15
 2,Sides,Crispy Breakfast Potatoes,3.59
 2,Sides,Crispy Potato Pancakes,5.99
@@ -333,11 +294,8 @@
 2,Sides,Turkey Bacon Strips,2.39
 2,Sides,Hash Browns,3.59
 1,Signature Sandwiches,Classic Chicken Sandwich Combo,9.59
-1,Signature Sandwiches,Classic Chicken Sandwich,5.99
-1,Signature Sandwiches,Spicy Chicken Sandwich,5.99
 1,Signature Sandwiches,Spicy Chicken Sandwich Combo,9.59
 1,Signature Sandwiches,Chicken Littles Combo,10.79
-1,Signature Sandwiches,Chicken Little,3.83
 3,Snacks and Sweets,Madeleines,2.85
 3,Snacks and Sweets,Vanilla Biscotti with Almonds,2.25
 3,Snacks and Sweets,Dipped Madeleines ,3.15
@@ -360,20 +318,16 @@
 3,Snacks and Sweets,KIND Salted Caramel and Dark Chocolate Nut Bar,2.65
 3,Snacks and Sweets,Perfect Bar Peanut Butter,4.35
 3,Snacks and Sweets,Perfect Bar – Dark Chocolate Chip Peanut Butter,4.35
-3,Snacks and Sweets,Avocado Spread,1.45
 3,Snacks and Sweets,String Cheese,1.65
 4,Snacks, Sides and More,Oatmeal,4.19
 4,Snacks, Sides and More,Apple Slices,1.29
-4,Snacks, Sides and More,Sausage,2.59
 4,Snacks, Sides and More,Scrambled Eggs,4.39
 4,Snacks, Sides and More,2 Half Strips Bacon,1.99
-4,Snacks, Sides and More,Hash Browns,2.59
 4,Snacks, Sides and More,1 Slice of Toast,1.99
 1,Tenders and Nuggets,16 Tenders Family Bucket Meal,65.99
 1,Tenders and Nuggets,12 Tenders Family Bucket Meal,50.39
 1,Tenders and Nuggets,Nashville Hot Crispy Tenders Combo,11.99
 1,Tenders and Nuggets,Sides Lovers 8 pc. Tenders Meal,33.59
-1,Tenders and Nuggets,Crispy Tenders Combo,13.19
 1,Tenders and Nuggets,8 Tenders Family Bucket Meal,34.79
 1,Tenders and Nuggets,Tenders Bucket for One,14.99
 1,Tenders and Nuggets,Popcorn Nuggets Combo,11.99
@@ -394,3 +348,7 @@
 6,Appetizers,Chicken Quesadilla,9.99
 6,Appetizers,Chicken Wings,10.99
 5,Appetizers,Chicken Tenders,9.99
+1,chicken,Samyo Special Chicken,12.0
+1,Halua,Halua,10.0
+1,sdgsdgsd,sdgsdg,12.0
+1,Biriani,Biriani,2.0

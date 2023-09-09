@@ -37,4 +37,12 @@ public class Customer implements java.io.Serializable {
         return myOrders;
     }
 
+    public void deliverOrder(Order order) {
+        for (Order o : myOrders)
+            if (o.getFood().getName().equals(order.getFood().getName())) {
+                o.setAccepted(true);
+                break;
+            }
+    }
+
 }

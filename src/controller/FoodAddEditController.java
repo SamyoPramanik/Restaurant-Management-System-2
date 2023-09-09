@@ -34,8 +34,22 @@ public class FoodAddEditController {
 
     @FXML
     void addFood(ActionEvent event) {
+        if (foodName.getText().isEmpty() || foodCategory.getText().isEmpty() || foodPrice.getText().isEmpty()) {
+            foodMsg.setText("Please fill all the fields");
+            return;
+        }
+
+        double foodPriceDouble = 0;
+
+        try {
+            foodPriceDouble = Double.parseDouble(foodPrice.getText());
+        } catch (Exception e) {
+            foodMsg.setText("Please enter a valid price");
+            return;
+        }
+
         Food food = new Food(resId, null, foodCategory.getText(), foodName.getText(),
-                Double.parseDouble(foodPrice.getText()));
+                foodPriceDouble);
         ((RestaurantUser) main).addNewFood(food);
     }
 

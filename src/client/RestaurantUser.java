@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import controller.FoodAddEditController;
 import controller.RestaurantHomeController;
+import controller.RestaurantOrdersController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,10 +15,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import requests.AddFood;
 import requests.CheckNewOrder;
+import requests.DeliverOrder;
 import requests.RestaurantGetOrder;
 import requests.SearchFood;
+import requests.SearchFoodGivenRestaurant;
 import threads.RestaurantCheckOrder;
-import threads.SendRequest;
 import util.Food;
 import util.NetworkUtil;
 import util.Order;
@@ -33,6 +35,7 @@ public class RestaurantUser {
     Stage newFoodStg;
     RestaurantHomeController controller;
     FoodAddEditController foodAddEditController;
+    RestaurantOrdersController ordersController;
     int newOrderCount = 0;
 
     public RestaurantUser(NetworkUtil nu, int resId) {
@@ -55,33 +58,10 @@ public class RestaurantUser {
 
     public void showRestaurantHome() {
         try {
-            // while (true) {
-            // System.out.println("1. Search food");
-            // System.out.println("2. Show order");
-            // System.out.println("3. Exit");
+            controller = null;
+            foodAddEditController = null;
+            ordersController = null;
 
-            // int choice = Integer.parseInt(sc.nextLine());
-
-            // if (choice == 2) {
-            // nu.write(new RestaurantGetOrder(resId));
-            // // isOrderChecking = false;
-            // // SendRequest request = new SendRequest(this);
-            // // request.join();
-            // Object o = nu.read();
-            // if (o instanceof Response) {
-            // response = (Response) o;
-            // }
-
-            // if (response != null && response.getMessage().equals("orders")) {
-            // Object data = response.getData();
-            // ArrayList<Order> orders = (ArrayList<Order>) data;
-            // response = null;
-
-            // for (int i = 1; i <= orders.size(); i++) {
-            // System.out.println(i + ". " + orders.get(i - 1).getFood().getName());
-            // }
-            // }
-            // }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/restaurantHome.fxml"));
             Parent root = loader.load();
             controller = loader.getController();
@@ -95,6 +75,57 @@ public class RestaurantUser {
 
         Exception e) {
             System.out.println("Error: in RestaurantUser showMain " + e);
+        }
+    }
+
+    public void showRestaurantOrders() {
+        try {
+            controller = null;
+            foodAddEditController = null;
+            ordersController = null;
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/restaurantOrders.fxml"));
+            Parent root = loader.load();
+            ordersController = loader.getController();
+
+            System.out.println("showing orders");
+            ordersController.setMain(this);
+            stg.setScene(new Scene(root));
+            stg.setResizable(false);
+            stg.show();
+
+            isNewOrderChecking = false;
+            new Thread(() -> getRestaurantOrders()).start();
+
+        } catch (Exception e) {
+            System.out.println("Error: in RestaurantUser showOrders " + e);
+        }
+    }
+
+    synchronized public void getRestaurantOrders() {
+        try {
+            nu.write(new RestaurantGetOrder(resId));
+            Object o = nu.read();
+            if (o instanceof Response) {
+                response = (Response) o;
+            }
+
+            if (response != null && response.getMessage().equals("orders")) {
+                Object data = response.getData();
+                ArrayList<Order> orders = (ArrayList<Order>) data;
+
+                Platform.runLater(() -> {
+                    try {
+                        ordersController.loadOrders(orders);
+                    } catch (Exception e) {
+                        System.out.println("Error: in RestaurantUser getRestaurantOrders " + e);
+                    }
+                });
+            }
+            isNewOrderChecking = true;
+            notifyAll();
+        } catch (Exception e) {
+            System.out.println("Error: in RestaurantUser getRestaurantOrders " + e);
         }
     }
 
@@ -123,17 +154,31 @@ public class RestaurantUser {
         }).start();
     }
 
+    public void deliverOrder(Order order) {
+        try {
+            DeliverOrder deliverOrder = new DeliverOrder(order);
+            nu.write(deliverOrder);
+            System.out.println("order delivered");
+
+        } catch (Exception e) {
+            System.out.println("Error: in deliverOrder " + e);
+        }
+    }
+
     synchronized void addNewFoodThread(Food food) {
         try {
             nu.write(new AddFood(food));
-            Thread.sleep(10000);
-            Object o = new Response("failed", null);// nu.read();
+            // Thread.sleep(10000);
+            Object o = nu.read();
             if (o instanceof Response) {
                 response = (Response) o;
             }
             if (response != null && response.getMessage().equals("added")) {
                 System.out.println("food added");
-                newFoodStg.close();
+
+                Platform.runLater(() -> {
+                    newFoodStg.close();
+                });
             }
 
             else {
@@ -141,7 +186,6 @@ public class RestaurantUser {
                     foodAddEditController.foodMsg.setText(response.getMessage());
                 });
             }
-
             isNewOrderChecking = true;
             notifyAll();
 
@@ -151,7 +195,7 @@ public class RestaurantUser {
     }
 
     synchronized public ArrayList<Food> searchFood(String foodName, String by) throws Exception {
-        nu.write(new SearchFood(foodName, by));
+        nu.write(new SearchFoodGivenRestaurant(foodName, by, resId));
 
         System.out.println("order checking");
         System.out.println("reading food...");
@@ -174,7 +218,7 @@ public class RestaurantUser {
     }
 
     synchronized public ArrayList<Food> searchFood(double minPrice, double maxPrice, String by) throws Exception {
-        nu.write(new SearchFood(minPrice, maxPrice, by));
+        nu.write(new SearchFoodGivenRestaurant(minPrice, maxPrice, by, resId));
 
         System.out.println("order checking");
         System.out.println("reading food...");
@@ -213,8 +257,39 @@ public class RestaurantUser {
                 if (newOrder.getMessage().equals("no new order") == false) {
                     System.out.println(newOrder.getMessage());
 
+                    isNewOrderChecking = false;
+
+                    if (ordersController != null)
+                        new Thread(() -> getRestaurantOrders()).start();
+
                     Platform.runLater(() -> {
-                        controller.newOrderCount.setText(newOrder.getMessage());
+                        if (controller != null) {
+                            controller.newOrderCount.setText(newOrder.getMessage());
+                            controller.newOrderCount.setVisible(true);
+                            controller.newOrderCount.setManaged(true);
+                        }
+
+                        if (ordersController != null) {
+                            ordersController.newOrderCount.setText(newOrder.getMessage());
+                            ordersController.newOrderCount.setVisible(true);
+                            ordersController.newOrderCount.setManaged(true);
+                        }
+                    });
+                }
+
+                else {
+                    Platform.runLater(() -> {
+                        if (controller != null) {
+                            controller.newOrderCount.setText("");
+                            controller.newOrderCount.setVisible(false);
+                            controller.newOrderCount.setManaged(false);
+                        }
+
+                        if (ordersController != null) {
+                            ordersController.newOrderCount.setText("");
+                            ordersController.newOrderCount.setVisible(false);
+                            ordersController.newOrderCount.setManaged(false);
+                        }
                     });
                 }
                 response = null;

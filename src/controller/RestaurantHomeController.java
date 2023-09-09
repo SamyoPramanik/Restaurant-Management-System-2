@@ -77,7 +77,7 @@ public class RestaurantHomeController implements Initializable {
 
     @FXML
     void showMyOrder(ActionEvent event) {
-
+        main.showRestaurantOrders();
     }
 
     @FXML

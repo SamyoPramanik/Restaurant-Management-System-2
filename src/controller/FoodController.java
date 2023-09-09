@@ -10,11 +10,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import util.Food;
+import util.Order;
 
 public class FoodController {
 
     Object main;
     Food food;
+    Order order;
 
     @FXML
     private Label foodCategory;
@@ -38,6 +40,9 @@ public class FoodController {
     private Button editButton;
 
     @FXML
+    private Button deliverButton;
+
+    @FXML
     void addToCart(Event event) {
         ((CustomerHomeController) main).addToCart(food);
     }
@@ -47,8 +52,51 @@ public class FoodController {
         ((CartController) main).removeFromCart(food);
     }
 
+    @FXML
+    void deliver(ActionEvent event) {
+        ((RestaurantOrdersController) main).deliverOrder(order);
+        deliverButton.setVisible(false);
+        deliverButton.setManaged(false);
+        foodRestaurant.setText("Delivered");
+
+    }
+
     public void setMain(Object main) {
         this.main = main;
+    }
+
+    private void buttonVisibility() {
+        addButton.setVisible(false);
+        addButton.setManaged(false);
+        editButton.setVisible(false);
+        editButton.setManaged(false);
+        deliverButton.setVisible(false);
+        deliverButton.setManaged(false);
+        removeButton.setVisible(false);
+        removeButton.setManaged(false);
+
+        if (main instanceof CartController) {
+            removeButton.setVisible(true);
+            removeButton.setManaged(true);
+        }
+
+        else if (main instanceof CustomerHomeController) {
+            addButton.setVisible(true);
+            addButton.setManaged(true);
+        }
+
+        else if (main instanceof CustomerMyOrderController) {
+        }
+
+        else if (main instanceof RestaurantHomeController) {
+            editButton.setVisible(true);
+            editButton.setManaged(true);
+        }
+
+        else if (main instanceof RestaurantOrdersController) {
+            deliverButton.setVisible(true);
+            deliverButton.setManaged(true);
+        }
     }
 
     public void set(Food food, String name, String category, String price, String restaurant) {
@@ -58,35 +106,23 @@ public class FoodController {
         foodPrice.setText("$" + price);
         foodRestaurant.setText(restaurant);
 
-        if (main instanceof CartController) {
-            addButton.setVisible(false);
-            addButton.setManaged(false);
-            editButton.setVisible(false);
-            editButton.setManaged(false);
+        buttonVisibility();
+    }
+
+    public void set(Order order) {
+        this.order = order;
+        this.food = order.getFood();
+        foodName.setText(food.getName());
+        foodCategory.setText(food.getCategory());
+        foodPrice.setText("$" + food.getPrice());
+        foodRestaurant.setText("Ordered by: " + order.getCustomerName());
+
+        if (order.isAccepted()) {
+            foodRestaurant.setText("Delivered");
+            deliverButton.setVisible(false);
+            deliverButton.setManaged(false);
         }
 
-        else if (main instanceof CustomerHomeController) {
-            System.out.println("CustomerHomeController button hide");
-            removeButton.setVisible(false);
-            removeButton.setManaged(false);
-            editButton.setVisible(false);
-            editButton.setManaged(false);
-        }
-
-        else if (main instanceof CustomerMyOrderController) {
-            removeButton.setVisible(false);
-            removeButton.setManaged(false);
-            addButton.setVisible(false);
-            addButton.setManaged(false);
-            editButton.setVisible(false);
-            editButton.setManaged(false);
-        }
-
-        else if (main instanceof RestaurantHomeController) {
-            removeButton.setVisible(false);
-            removeButton.setManaged(false);
-            addButton.setVisible(false);
-            addButton.setManaged(false);
-        }
+        buttonVisibility();
     }
 }

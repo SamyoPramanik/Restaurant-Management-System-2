@@ -173,14 +173,16 @@ public class Restaurant implements java.io.Serializable {
         return null;
     }
 
-    public void addOrder(int customerId, String foodName, String foodCategory, Boolean isAccepted) {
+    public void addOrder(int customerId, String customerName, String foodName, String foodCategory,
+            Boolean isAccepted) {
 
-        orders.add(new Order(customerId, searchFood(foodName, foodCategory), isAccepted));
+        orders.add(new Order(customerId, customerName, searchFood(foodName, foodCategory), isAccepted));
 
     }
 
-    synchronized public void addNewOrder(int customerId, String foodName, String foodCategory, Boolean isAccepted) {
-        orders.add(0, new Order(customerId, searchFood(foodName, foodCategory), isAccepted));
+    synchronized public void addNewOrder(int customerId, String customerName, String foodName, String foodCategory,
+            Boolean isAccepted) {
+        orders.add(0, new Order(customerId, customerName, searchFood(foodName, foodCategory), isAccepted));
         newOrderCount++;
     }
 
@@ -193,6 +195,18 @@ public class Restaurant implements java.io.Serializable {
     }
 
     public ArrayList<Order> getOrders() {
+        newOrderCount = 0;
         return orders;
+    }
+
+    public void deliverOrder(Order order) {
+        for (Order o : orders)
+            if (o.getFood().getName().equals(order.getFood().getName())) {
+                o.setAccepted(true);
+                System.out.println(o.getFood().getName() + " delivered");
+                return;
+            }
+        System.out.println(order.getFood().getName() + "not delivered");
+
     }
 }

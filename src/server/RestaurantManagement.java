@@ -95,17 +95,45 @@ public class RestaurantManagement {
         }
     }
 
-    void insertFood(int restaurantId, String category, String name, double price) {
+    public Response insertFood(int restaurantId, String category, String name, double price) {
         String restaurantName = "";
         for (Restaurant r : restaurantList) {
             if (r.getId() == restaurantId) {
                 restaurantName = r.getName();
+                ArrayList<Food> foods = searchFoodByNameGivenRestaurant(name, restaurantName);
+
+                if (foods.size() > 0) {
+                    return new Response("Food already exists", null);
+                }
+
                 r.addFood(category, name, price);
                 break;
             }
         }
 
         foodList.add(new Food(restaurantId, restaurantName, category, name, price));
+        increaseUpdate();
+        return new Response("added", null);
+    }
+
+    public Response addFood(int restaurantId, String category, String name, double price) {
+        String restaurantName = "";
+        for (Restaurant r : restaurantList) {
+            if (r.getId() == restaurantId) {
+                restaurantName = r.getName();
+                ArrayList<Food> foods = searchFoodByNameGivenRestaurant(name, restaurantName);
+
+                if (foods.size() > 0) {
+                    return new Response("Food already exists", null);
+                }
+
+                r.addFood(category, name, price);
+                break;
+            }
+        }
+
+        foodList.add(new Food(restaurantId, restaurantName, category, name, price));
+        return new Response("added", null);
     }
 
     public Response insertUser(String name, String username, String password, String type) {
@@ -169,25 +197,27 @@ public class RestaurantManagement {
 
     public Response addOrder(int customerId, Food food, int restaurantId, boolean isAccepted) {
         Boolean orderInRestaurant = false, orderInCustomer = false;
-        for (Restaurant r : restaurantList) {
-            if (r.getId() == restaurantId) {
-                r.addOrder(customerId, food.getName(), food.getCategory(), isAccepted);
-                food = r.searchFood(food.getName(), food.getCategory());
-                orderInRestaurant = true;
-                break;
-            }
-        }
+        Customer customer = null;
 
         for (Customer c : customerList) {
             if (c.getId() == customerId) {
+                customer = c;
                 c.addOrder(new Order(customerId, food, isAccepted));
                 orderInCustomer = true;
                 break;
             }
         }
 
+        for (Restaurant r : restaurantList) {
+            if (r.getId() == restaurantId) {
+                r.addOrder(customerId, customer.getName(), food.getName(), food.getCategory(), isAccepted);
+                food = r.searchFood(food.getName(), food.getCategory());
+                orderInRestaurant = true;
+                break;
+            }
+        }
+
         if (orderInRestaurant && orderInCustomer) {
-            increaseUpdate();
             return new Response("Order added", null);
         }
 
@@ -196,29 +226,51 @@ public class RestaurantManagement {
 
     public Response addNewOrder(int customerId, Food food, int restaurantId, boolean isAccepted) {
         Boolean orderInRestaurant = false, orderInCustomer = false;
-        for (Restaurant r : restaurantList) {
-            if (r.getId() == restaurantId) {
-                r.addNewOrder(customerId, food.getName(), food.getCategory(), isAccepted);
-                food = r.searchFood(food.getName(), food.getCategory());
-                orderInRestaurant = true;
-                break;
-            }
-        }
+        Customer customer = null;
 
         for (Customer c : customerList) {
             if (c.getId() == customerId) {
+                customer = c;
                 c.addOrder(new Order(customerId, food, isAccepted));
                 orderInCustomer = true;
                 break;
             }
         }
 
+        for (Restaurant r : restaurantList) {
+            if (r.getId() == restaurantId) {
+                r.addNewOrder(customerId, customer.getName(), food.getName(), food.getCategory(), isAccepted);
+                food = r.searchFood(food.getName(), food.getCategory());
+                orderInRestaurant = true;
+                break;
+            }
+        }
+
         if (orderInRestaurant && orderInCustomer) {
             increaseUpdate();
+
             return new Response("Order added", null);
         }
 
         return new Response("Order not added", null);
+    }
+
+    synchronized public void deliverFood(Order order) {
+        for (Customer c : customerList) {
+            if (c.getId() == order.getCustomerId()) {
+                c.deliverOrder(order);
+                break;
+            }
+        }
+
+        for (Restaurant r : restaurantList) {
+            if (r.getId() == order.getResId()) {
+                r.deliverOrder(order);
+                break;
+            }
+        }
+
+        increaseUpdate();
     }
 
     public ArrayList<Restaurant> searchRestaurantByName(String name) {
@@ -737,7 +789,7 @@ public class RestaurantManagement {
             String name = parts[2];
             double price = Double.parseDouble(parts[3]);
 
-            insertFood(restaurantId, category, name, price);
+            addFood(restaurantId, category, name, price);
 
         }
         br.close();
@@ -795,7 +847,8 @@ public class RestaurantManagement {
 
             for (Restaurant r : restaurantList)
                 if (r.getId() == restaurantId) {
-                    r.addOrder(customerId, foodName, foodCategory, isAccepted == 1 ? true : false);
+                    Food food = r.searchFood(foodName, foodCategory);
+                    addOrder(customerId, food, r.getId(), isAccepted == 1 ? true : false);
                     break;
                 }
 

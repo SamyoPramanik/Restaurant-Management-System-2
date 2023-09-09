@@ -2,11 +2,19 @@ package util;
 
 public class Order implements java.io.Serializable {
     private int customerId;
+    private String customerName;
     private Food food;
     Boolean isAccepted;
 
     public Order(int customerId, Food food, Boolean isAccepted) {
         this.customerId = customerId;
+        this.food = food;
+        this.isAccepted = isAccepted;
+    }
+
+    public Order(int customerId, String customerName, Food food, Boolean isAccepted) {
+        this.customerId = customerId;
+        this.customerName = customerName;
         this.food = food;
         this.isAccepted = isAccepted;
     }
@@ -21,6 +29,10 @@ public class Order implements java.io.Serializable {
         this.customerId = customerId;
     }
 
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     public void setFood(Food food) {
         this.food = food;
     }
@@ -31,6 +43,10 @@ public class Order implements java.io.Serializable {
 
     public int getCustomerId() {
         return customerId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
     }
 
     public Food getFood() {

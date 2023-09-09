@@ -46,7 +46,7 @@ public class CartController {
             FoodController foodController = loader.getController();
 
             foodController.setMain(this);
-            foodController.set(food, food.getName(), food.getCategory(), String.format(".2f", food.getPrice()),
+            foodController.set(food, food.getName(), food.getCategory(), food.getPrice() + "",
                     food.getResName());
             orderList.getChildren().add(pane);
         }

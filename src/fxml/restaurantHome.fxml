@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RestaurantHomeController">
    <children>
@@ -21,16 +22,28 @@
          <left>
             <VBox prefHeight="446.0" prefWidth="200.0" styleClass="leftNavbar" BorderPane.alignment="CENTER">
                <children>
-                  <Button contentDisplay="RIGHT" mnemonicParsing="false" prefWidth="200.0" styleClass="curButton" text="Foods" />
-                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showMyOrder" prefWidth="200.0" styleClass="navButton" text="Orders">
+                  <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" prefWidth="200.0" styleClass="curButton" text="Foods">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Button>
+                  <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showMyOrder" prefHeight="6.0" prefWidth="200.0" styleClass="navButton" text="Orders">
                      <graphic>
-                        <Label fx:id="newOrderCount" alignment="CENTER" minWidth="27.0" prefHeight="27.0" style="-fx-background-color: #12599f; -fx-padding: 5; -fx-background-radius: 50; -fx-border-color: transparant; -fx-text-fill: white;" text="100">
+                        <Label fx:id="newOrderCount" alignment="CENTER" minWidth="27.0" prefHeight="28.0" style="-fx-background-color: #12599f; -fx-padding: 1 5 1 5; -fx-background-radius: 50; -fx-border-color: transparant; -fx-text-fill: white;" text="100" visible="false">
                            <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                            </padding>
+                           <font>
+                              <Font size="10.0" />
+                           </font>
                         </Label>
-                     </graphic></Button>
-                  <Button mnemonicParsing="false" prefWidth="200.0" styleClass="navButton" text="Button" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="200.0" styleClass="navButton" text="Button" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Button>
                </children>
             </VBox>
          </left>

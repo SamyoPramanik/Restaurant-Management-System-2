@@ -82,6 +82,18 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
+                  <Button fx:id="deliverButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#deliver" prefHeight="38.0" prefWidth="97.0" styleClass="logoButtons" text="Deliver">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/plus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
          </children>

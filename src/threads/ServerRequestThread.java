@@ -116,6 +116,30 @@ public class ServerRequestThread implements Runnable {
                     }
                 }
 
+                else if (request instanceof SearchFoodGivenRestaurant) {
+                    SearchFoodGivenRestaurant search = (SearchFoodGivenRestaurant) request;
+                    Restaurant r = res.searchRestaurantById(search.restaurantId);
+
+                    if (search.by.equals("name")) {
+                        ArrayList<Food> foods = res.searchFoodByNameGivenRestaurant(search.str, r.getName());
+                        sendSearchFoodResponse(foods);
+
+                    }
+
+                    else if (search.by.equals("category")) {
+                        ArrayList<Food> foods = res.searchFoodByCategoryGivenRestaurant(search.str, r.getName());
+                        sendSearchFoodResponse(foods);
+
+                    }
+
+                    else if (search.by.equals("price")) {
+                        ArrayList<Food> foods = res.searchFoodByPriceRangeGivenRestaurant(search.minScore,
+                                search.maxScore, r.getName());
+                        sendSearchFoodResponse(foods);
+                    }
+
+                }
+
                 else if (request instanceof Order) {
                     Order order = (Order) request;
                     Response response = res.addNewOrder(order.getCustomerId(), order.getFood(), order.getResId(),
@@ -154,6 +178,23 @@ public class ServerRequestThread implements Runnable {
                     Response response = new Response(orders.size() + " orders found", orders);
                     nu.write(response);
                 }
+
+                else if (request instanceof AddFood) {
+                    AddFood addFood = (AddFood) request;
+                    Food food = addFood.food;
+                    Response response = res.insertFood(food.getResId(), food.getCategory(), food.getName(),
+                            food.getPrice());
+                    nu.write(response);
+
+                }
+
+                else if (request instanceof DeliverOrder) {
+                    DeliverOrder deliverOrder = (DeliverOrder) request;
+                    Order order = deliverOrder.order;
+                    res.deliverFood(order);
+                    System.out.println("order delivered");
+                }
+
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
