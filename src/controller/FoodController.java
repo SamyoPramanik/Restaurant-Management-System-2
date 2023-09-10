@@ -53,6 +53,11 @@ public class FoodController {
     }
 
     @FXML
+    void editFood(ActionEvent event) {
+        ((RestaurantHomeController) main).editFood(food);
+    }
+
+    @FXML
     void deliver(ActionEvent event) {
         ((RestaurantOrdersController) main).deliverOrder(order);
         deliverButton.setVisible(false);

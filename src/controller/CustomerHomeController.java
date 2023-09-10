@@ -63,7 +63,6 @@ public class CustomerHomeController implements Initializable {
     void searchFood(Event event) {
         try {
             System.out.println("food search length: " + foodName.getText().length());
-
             new Thread(() -> {
                 searchFoodThread();
             }).start();

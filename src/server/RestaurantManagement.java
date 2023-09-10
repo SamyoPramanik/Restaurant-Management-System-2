@@ -96,7 +96,7 @@ public class RestaurantManagement {
         }
     }
 
-    public Response insertFood(int restaurantId, String category, String name, double price) {
+    synchronized public Response insertFood(int restaurantId, String category, String name, double price) {
         String restaurantName = "";
         for (Restaurant r : restaurantList) {
             if (r.getId() == restaurantId) {
@@ -115,6 +115,34 @@ public class RestaurantManagement {
         foodList.add(new Food(restaurantId, restaurantName, category, name, price));
         increaseUpdate();
         return new Response("added", null);
+    }
+
+    synchronized public Response updateFood(Food food, Food updateFood) {
+        for (Restaurant r : restaurantList) {
+            if (r.getId() == food.getResId()) {
+                String restaurantName = r.getName();
+                ArrayList<Food> foods = searchFoodByNameGivenRestaurant(updateFood.getName(), restaurantName);
+
+                if (foods.size() > 0 && food.getName().equalsIgnoreCase(updateFood.getName()) == false)
+                    return new Response("Food cannot be updated", null);
+                else
+                    r.updateFood(food, updateFood);
+
+                break;
+            }
+        }
+
+        for (Food f : foodList) {
+            if (f.getResId() == food.getResId() && f.getName().equalsIgnoreCase(food.getName())
+                    && f.getCategory().equalsIgnoreCase(food.getCategory())) {
+                f.setName(updateFood.getName());
+                f.setCategory(updateFood.getCategory());
+                f.setPrice(updateFood.getPrice());
+                break;
+            }
+        }
+        increaseUpdate();
+        return new Response("updated", null);
     }
 
     public Response addFood(int restaurantId, String category, String name, double price) {

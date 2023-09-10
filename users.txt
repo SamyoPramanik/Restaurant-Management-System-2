@@ -3,3 +3,4 @@ kfc,kfc,restaurant,1
 soumik,123,customer,3
 samyo,samyo,customer,4
 aranya,123,customer,5
+mim,mim,customer,6

@@ -70,7 +70,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button fx:id="editButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#removeFromCart" prefHeight="38.0" prefWidth="97.0" styleClass="logoButtons" text="Edit">
+                  <Button fx:id="editButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#editFood" prefHeight="38.0" prefWidth="97.0" styleClass="logoButtons" text="Edit">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>

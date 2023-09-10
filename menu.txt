@@ -348,7 +348,9 @@
 6,Appetizers,Chicken Quesadilla,9.99
 6,Appetizers,Chicken Wings,10.99
 5,Appetizers,Chicken Tenders,9.99
-1,chicken,Samyo Special Chicken,12.0
-1,Halua,Halua,10.0
-1,sdgsdgsd,sdgsdg,12.0
-1,Biriani,Biriani,2.0
+1,chap,10 chicken chap,20.0
+1,chap,12 chicken chap,50.0
+1,chap,12 chap,10.0
+1,chap,3 chap,20.0
+1,chicken,100 chicken leg,25.0
+1,chicken,1000 chicken leg,25.0

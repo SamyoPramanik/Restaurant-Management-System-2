@@ -173,6 +173,22 @@ public class Restaurant implements java.io.Serializable {
         return null;
     }
 
+    public void updateFood(Food food, Food updateFood) {
+        System.out.println("updating food menu size: " + menu.size());
+        for (Food f : menu) {
+            System.out.println("searching for food");
+            if (f.getName().equalsIgnoreCase(food.getName())
+                    && f.getCategory().equalsIgnoreCase(food.getCategory())) {
+                f.setName(updateFood.getName());
+                f.setCategory(updateFood.getCategory());
+                f.setPrice(updateFood.getPrice());
+
+                System.out.println("food updated");
+                break;
+            }
+        }
+    }
+
     public void addOrder(Order o) {
 
         orders.add(o);

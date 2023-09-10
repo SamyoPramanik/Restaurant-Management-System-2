@@ -10,5 +10,8 @@
 7,4,3 pc. Chicken Box,Big Box Meals,1,1
 8,4,Classic Chicken Sandwich Box,Big Box Meals,1,1
 9,4,Spicy Chicken Sandwich Box,Big Box Meals,1,1
-13,4,Spicy Chicken Sandwich Box,Big Box Meals,1,0
-14,4,Spicy Chicken Sandwich Box,Big Box Meals,1,0
+13,4,Spicy Chicken Sandwich Box,Big Box Meals,1,1
+14,4,Spicy Chicken Sandwich Box,Big Box Meals,1,1
+15,6,3 pc. Chicken Box,Big Box Meals,1,1
+16,6,Classic Chicken Sandwich Box,Big Box Meals,1,0
+17,6,Spicy Chicken Sandwich Box,Big Box Meals,1,1

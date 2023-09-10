@@ -90,24 +90,23 @@ public class RestaurantHomeController implements Initializable {
         main.showAddNewFood();
     }
 
+    public void editFood(Food food) {
+        main.showEditFood(food);
+    }
+
     synchronized void searchFoodThread() {
         try {
+            while (main.isNewOrderChecking) {
+                wait();
+            }
             System.out.println("food search length: " + foodName.getText().length());
             int idx = searchFoodBy.getSelectionModel().getSelectedIndex();
             if (idx == 0) {
-                if (foodName.getText().length() > 2)
-                    foods = main.searchFood(foodName.getText(), "name");
-
-                else
-                    return;
+                foods = main.searchFood(foodName.getText(), "name");
             }
 
             else if (idx == 1) {
-                if (foodName.getText().length() > 2)
-                    foods = main.searchFood(foodName.getText(), "category");
-
-                else
-                    return;
+                foods = main.searchFood(foodName.getText(), "category");
             }
 
             else if (idx == 2) {
@@ -127,7 +126,7 @@ public class RestaurantHomeController implements Initializable {
                     int i = 0;
                     for (Food food : foods) {
                         foodList.getItems().add(food.getName());
-                        // System.out.println(++i + ". " + food.getName());
+                        System.out.println(++i + ". " + food.getName());
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/food.fxml"));
                         Pane pane = loader.load();

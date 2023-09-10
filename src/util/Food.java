@@ -38,6 +38,29 @@ public class Food implements java.io.Serializable {
         return price;
     }
 
+    public void setResId(int resId) {
+        this.resId = resId;
+    }
+
+    public void setResName(String resName) {
+        this.resName = resName;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        if (price < 0)
+            this.price = 0;
+        else
+            this.price = price;
+    }
+
     public void show() {
         System.out.println("Name: " + name);
         System.out.println("Category: " + category);

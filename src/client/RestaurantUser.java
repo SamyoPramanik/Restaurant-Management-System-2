@@ -19,6 +19,7 @@ import requests.DeliverOrder;
 import requests.RestaurantGetOrder;
 import requests.SearchFood;
 import requests.SearchFoodGivenRestaurant;
+import requests.UpdateFood;
 import threads.RestaurantCheckOrder;
 import util.Food;
 import util.NetworkUtil;
@@ -154,6 +155,60 @@ public class RestaurantUser {
         }).start();
     }
 
+    public void showEditFood(Food food) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/foodAddEdit.fxml"));
+            Parent root = loader.load();
+            foodAddEditController = loader.getController();
+            foodAddEditController.setMain(this);
+            foodAddEditController.set(food, getId());
+
+            newFoodStg = new Stage();
+            newFoodStg.setScene(new Scene(root));
+            newFoodStg.setResizable(false);
+            newFoodStg.initModality(Modality.APPLICATION_MODAL);
+            newFoodStg.show();
+        } catch (Exception e) {
+            System.out.println("Error: in showEditFood " + e);
+        }
+    }
+
+    public void updateFood(Food food, Food updateFood) {
+        isNewOrderChecking = false;
+        new Thread(() -> {
+            updateFoodThread(food, updateFood);
+        }).start();
+    }
+
+    synchronized void updateFoodThread(Food food, Food updateFood) {
+        try {
+            nu.write(new UpdateFood(food, updateFood));
+            // Thread.sleep(10000);
+            Object o = nu.read();
+            if (o instanceof Response) {
+                response = (Response) o;
+            }
+            if (response != null && response.getMessage().equals("updated")) {
+                System.out.println("food updated");
+
+                Platform.runLater(() -> {
+                    newFoodStg.close();
+                });
+            }
+
+            else {
+                Platform.runLater(() -> {
+                    foodAddEditController.foodMsg.setText(response.getMessage());
+                });
+            }
+            isNewOrderChecking = true;
+            notifyAll();
+
+        } catch (Exception e) {
+            System.out.println("Error: in addNewFoodThread " + e);
+        }
+    }
+
     public void deliverOrder(Order order) {
         try {
             DeliverOrder deliverOrder = new DeliverOrder(order);
@@ -166,6 +221,10 @@ public class RestaurantUser {
 
     synchronized void addNewFoodThread(Food food) {
         try {
+            while (isNewOrderChecking) {
+                wait();
+            }
+
             nu.write(new AddFood(food));
             // Thread.sleep(10000);
             Object o = nu.read();

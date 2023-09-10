@@ -55,7 +55,23 @@ public class FoodAddEditController {
 
     @FXML
     void updateFood(ActionEvent event) {
+        if (foodName.getText().isEmpty() || foodCategory.getText().isEmpty() || foodPrice.getText().isEmpty()) {
+            foodMsg.setText("Please fill all the fields");
+            return;
+        }
 
+        double foodPriceDouble = 0;
+
+        try {
+            foodPriceDouble = Double.parseDouble(foodPrice.getText());
+        } catch (Exception e) {
+            foodMsg.setText("Please enter a valid price");
+            return;
+        }
+
+        Food updatedFood = new Food(resId, null, foodCategory.getText(), foodName.getText(),
+                foodPriceDouble);
+        ((RestaurantUser) main).updateFood(food, updatedFood);
     }
 
     public void setMain(Object main) {
@@ -70,17 +86,15 @@ public class FoodAddEditController {
             foodName.setText(food.getName());
             foodCategory.setText(food.getCategory());
             foodPrice.setText(food.getPrice() + "");
+            addFoodButton.setVisible(false);
+            addFoodButton.setManaged(false);
         }
 
-        if (main instanceof RestaurantUser) {
+        else {
             updateFoodButton.setVisible(false);
             updateFoodButton.setManaged(false);
         }
 
-        else if (main instanceof FoodController) {
-            addFoodButton.setVisible(false);
-            addFoodButton.setManaged(false);
-        }
     }
 
 }

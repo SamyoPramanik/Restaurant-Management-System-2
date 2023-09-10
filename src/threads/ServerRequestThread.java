@@ -188,6 +188,14 @@ public class ServerRequestThread implements Runnable {
 
                 }
 
+                else if (request instanceof UpdateFood) {
+                    UpdateFood updateFood = (UpdateFood) request;
+                    Food food = updateFood.food;
+                    Food updateFood1 = updateFood.updateFood;
+                    Response response = res.updateFood(food, updateFood1);
+                    nu.write(response);
+                }
+
                 else if (request instanceof DeliverOrder) {
                     DeliverOrder deliverOrder = (DeliverOrder) request;
                     Order order = deliverOrder.order;
