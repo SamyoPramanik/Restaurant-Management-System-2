@@ -13,7 +13,7 @@ public class Customer implements java.io.Serializable {
         myOrders = new ArrayList<Order>();
     }
 
-    public void addOrder(Order order) {
+    synchronized public void addOrder(Order order) {
         myOrders.add(order);
     }
 
@@ -39,10 +39,14 @@ public class Customer implements java.io.Serializable {
 
     public void deliverOrder(Order order) {
         for (Order o : myOrders)
-            if (o.getFood().getName().equals(order.getFood().getName())) {
+            if (o.getId() == order.getId()) {
                 o.setAccepted(true);
                 break;
             }
+        for (Order o : myOrders) {
+            System.out.print(o.isAccepted() + " ");
+        }
+        System.out.println();
     }
 
 }

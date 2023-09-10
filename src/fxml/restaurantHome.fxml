@@ -121,9 +121,9 @@
                      </padding>
                   </HBox>
                   <ListView fx:id="foodList" prefHeight="34.0" prefWidth="532.0" />
-                  <ScrollPane hbarPolicy="NEVER" prefHeight="248.0" prefWidth="546.0">
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="400.0" prefWidth="538.0">
                     <content>
-                        <VBox fx:id="foodList1" prefHeight="246.0" prefWidth="525.0" />
+                        <VBox fx:id="foodList1" prefHeight="246.0" prefWidth="522.0" />
                     </content>
                   </ScrollPane>
                </children>

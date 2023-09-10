@@ -45,7 +45,7 @@ public class RestaurantOrdersController {
             orderList.getItems().clear();
             orderList1.getChildren().clear();
             for (Order order : orders) {
-                orderList.getItems().add(0, order.getFood().getName());
+                orderList.getItems().add(order.getFood().getName());
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/food.fxml"));
                 Pane pane = loader.load();
@@ -53,7 +53,7 @@ public class RestaurantOrdersController {
                 foodController.setMain(this);
 
                 foodController.set(order);
-                orderList1.getChildren().add(0, pane);
+                orderList1.getChildren().add(pane);
             }
         } catch (Exception e) {
             System.out.println("Error in load orders: " + e);

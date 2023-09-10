@@ -158,7 +158,6 @@ public class RestaurantUser {
         try {
             DeliverOrder deliverOrder = new DeliverOrder(order);
             nu.write(deliverOrder);
-            System.out.println("order delivered");
 
         } catch (Exception e) {
             System.out.println("Error: in deliverOrder " + e);

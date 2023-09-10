@@ -117,12 +117,13 @@ public class FoodController {
         foodPrice.setText("$" + food.getPrice());
         foodRestaurant.setText("Ordered by: " + order.getCustomerName());
 
+        buttonVisibility();
+
         if (order.isAccepted()) {
             foodRestaurant.setText("Delivered");
             deliverButton.setVisible(false);
             deliverButton.setManaged(false);
         }
 
-        buttonVisibility();
     }
 }

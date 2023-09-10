@@ -3,15 +3,15 @@ package util;
 import java.util.ArrayList;
 
 public class Restaurant implements java.io.Serializable {
-    private int id;
-    private String name;
-    private double score;
-    private String price;
-    private String zipcode;
-    private String category1;
-    private String category2;
-    private String category3;
-    private double maxPriceOfFood;
+    volatile private int id;
+    volatile private String name;
+    volatile private double score;
+    volatile private String price;
+    volatile private String zipcode;
+    volatile private String category1;
+    volatile private String category2;
+    volatile private String category3;
+    volatile private double maxPriceOfFood;
     volatile private int newOrderCount = 0;
 
     volatile private ArrayList<Food> menu = new ArrayList<Food>();
@@ -173,16 +173,13 @@ public class Restaurant implements java.io.Serializable {
         return null;
     }
 
-    public void addOrder(int customerId, String customerName, String foodName, String foodCategory,
-            Boolean isAccepted) {
+    public void addOrder(Order o) {
 
-        orders.add(new Order(customerId, customerName, searchFood(foodName, foodCategory), isAccepted));
-
+        orders.add(o);
     }
 
-    synchronized public void addNewOrder(int customerId, String customerName, String foodName, String foodCategory,
-            Boolean isAccepted) {
-        orders.add(0, new Order(customerId, customerName, searchFood(foodName, foodCategory), isAccepted));
+    synchronized public void addNewOrder(Order o) {
+        orders.add(0, o);
         newOrderCount++;
     }
 
@@ -200,13 +197,17 @@ public class Restaurant implements java.io.Serializable {
     }
 
     public void deliverOrder(Order order) {
-        for (Order o : orders)
-            if (o.getFood().getName().equals(order.getFood().getName())) {
-                o.setAccepted(true);
-                System.out.println(o.getFood().getName() + " delivered");
-                return;
-            }
-        System.out.println(order.getFood().getName() + "not delivered");
+        System.out.println(order.getFood().getName() + " delivered");
 
+        for (Order o : orders)
+            if (o.getId() == order.getId()) {
+                o.setAccepted(true);
+                break;
+            }
+        for (Order o : orders) {
+            System.out.print(o.isAccepted() + " ");
+        }
+        System.out.println();
     }
+
 }
