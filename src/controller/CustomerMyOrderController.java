@@ -17,9 +17,6 @@ public class CustomerMyOrderController {
     private CustomerUser main;
 
     @FXML
-    private ListView<String> orderlist;
-
-    @FXML
     private VBox orderlist1;
 
     @FXML
@@ -39,9 +36,7 @@ public class CustomerMyOrderController {
     public void loadOrders(ArrayList<Order> orders) {
         try {
             orderlist1.getChildren().clear();
-            orderlist.getItems().clear();
             for (Order order : orders) {
-                orderlist.getItems().add(order.getFood().getName());
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/food.fxml"));
                 Pane pane = loader.load();
                 FoodController foodController = loader.getController();

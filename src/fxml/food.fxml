@@ -69,7 +69,7 @@
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/plus.png" />
+                              <Image url="@../images/trash.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -81,7 +81,7 @@
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/plus.png" />
+                              <Image url="@../images/edit.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -93,7 +93,7 @@
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/plus.png" />
+                              <Image url="@../images/deliver.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -101,7 +101,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Label fx:id="isDelivered" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="98.0" text="heool">
+                  <Label fx:id="isDelivered" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="98.0">
                      <padding>
                         <Insets right="10.0" />
                      </padding>

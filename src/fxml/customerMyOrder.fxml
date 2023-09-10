@@ -2,7 +2,6 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -28,7 +27,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="532.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#showuser" styleClass="topNavButton">
+                        <Button mnemonicParsing="false" onAction="#showuser" styleClass="userButton">
                            <graphic>
                               <ImageView fitHeight="28.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -39,10 +38,9 @@
                         </Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="orderlist" prefHeight="34.0" prefWidth="532.0" />
-                  <ScrollPane hbarPolicy="NEVER" prefHeight="360.0" prefWidth="532.0">
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="414.0" prefWidth="538.0">
                     <content>
-                        <VBox fx:id="orderlist1" prefHeight="358.0" prefWidth="522.0" />
+                        <VBox fx:id="orderlist1" prefHeight="395.0" prefWidth="522.0" />
                     </content>
                   </ScrollPane>
                </children>

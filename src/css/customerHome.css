@@ -26,9 +26,48 @@
     -fx-padding: 10 0 10 0;
 }
 
-.topNavButton {
+.topNavButton,
+.searchButton,
+.userButton,
+.cartButton {
     -fx-background-color: transparant;
     -fx-border-width: 0 0 0 0;
     -fx-border-color: transparent;
     -fx-padding: 10 10 10 10;
+}
+
+.searchButton .image-view {
+    -fx-image: url("../images/search.png");
+}
+
+.searchButton:hover .image-view {
+    -fx-image: url("../images/search_hover.png");
+}
+
+.searchButton:pressed .image-view {
+    -fx-image: url("../images/search_pressed.png");
+}
+
+.userButton .image-view {
+    -fx-image: url("../images/user.png");
+}
+
+.userButton:hover .image-view {
+    -fx-image: url("../images/user_hover.png");
+}
+
+.userButton:pressed .image-view {
+    -fx-image: url("../images/user_pressed.png");
+}
+
+.cartButton .image-view {
+    -fx-image: url("../images/cart.png");
+}
+
+.cartButton:hover .image-view {
+    -fx-image: url("../images/cart_hover.png");
+}
+
+.cartButton:pressed .image-view {
+    -fx-image: url("../images/cart_pressed.png");
 }

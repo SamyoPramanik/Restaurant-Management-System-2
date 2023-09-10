@@ -18,9 +18,6 @@ public class RestaurantOrdersController {
     private RestaurantUser main;
 
     @FXML
-    private ListView<String> orderList;
-
-    @FXML
     private VBox orderList1;
 
     @FXML
@@ -43,11 +40,8 @@ public class RestaurantOrdersController {
 
     public void loadOrders(ArrayList<Order> orders) {
         try {
-            orderList.getItems().clear();
             orderList1.getChildren().clear();
             for (Order order : orders) {
-                orderList.getItems().add(order.getFood().getName());
-
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/food.fxml"));
                 Pane pane = loader.load();
                 FoodController foodController = loader.getController();

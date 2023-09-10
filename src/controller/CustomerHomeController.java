@@ -36,9 +36,6 @@ public class CustomerHomeController implements Initializable {
     private HBox byPrice;
 
     @FXML
-    private ListView<String> foodList;
-
-    @FXML
     private TextField foodName;
 
     @FXML
@@ -119,11 +116,9 @@ public class CustomerHomeController implements Initializable {
             }
             Platform.runLater(() -> {
                 try {
-                    foodList.getItems().clear();
                     foodList1.getChildren().clear();
                     int i = 0;
                     for (Food food : foods) {
-                        foodList.getItems().add(food.getName());
                         System.out.println(++i + ". " + food.getName());
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/food.fxml"));

@@ -29,6 +29,11 @@
 32,4,3 pc. Chicken Box,Big Box Meals,1,1
 33,4,Classic Chicken Sandwich Box,Big Box Meals,1,1
 38,4,Healthy Sweets,Sweets,10,1
+39,4,Healthy Sweets,Sweets,10,1
+40,4,Healthy Sweets,Sweets,10,0
+41,4,100 chicken leg,chicken,1,1
+42,4,2 pc. Drum and Thigh Fill Up,World Famous Chicken,1,1
+43,4,JKL Special,jkl,13,1
 15,6,3 pc. Chicken Box,Big Box Meals,1,1
 16,6,Classic Chicken Sandwich Box,Big Box Meals,1,1
 17,6,Spicy Chicken Sandwich Box,Big Box Meals,1,1

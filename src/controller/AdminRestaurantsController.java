@@ -33,9 +33,6 @@ public class AdminRestaurantsController implements Initializable {
     private VBox foodInfo;
 
     @FXML
-    private ListView<String> resList;
-
-    @FXML
     private VBox resList1;
 
     @FXML
@@ -127,11 +124,9 @@ public class AdminRestaurantsController implements Initializable {
             }
             Platform.runLater(() -> {
                 try {
-                    resList.getItems().clear();
                     resList1.getChildren().clear();
                     int i = 0;
                     for (RestaurantInfo r : restaurants) {
-                        resList.getItems().add(r.resName);
                         System.out.println(++i + ". " + r.resName);
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/restaurant.fxml"));

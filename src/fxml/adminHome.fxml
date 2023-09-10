@@ -29,7 +29,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="538.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#showuser" styleClass="topNavButton">
+                        <Button mnemonicParsing="false" onAction="#showuser" styleClass="userButton">
                            <graphic>
                               <ImageView fitHeight="28.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

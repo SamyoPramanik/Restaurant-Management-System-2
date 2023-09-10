@@ -38,9 +38,6 @@ public class RestaurantHomeController implements Initializable {
     private VBox foodInfo;
 
     @FXML
-    private ListView<String> foodList;
-
-    @FXML
     private VBox foodList1;
 
     @FXML
@@ -121,11 +118,9 @@ public class RestaurantHomeController implements Initializable {
             }
             Platform.runLater(() -> {
                 try {
-                    foodList.getItems().clear();
                     foodList1.getChildren().clear();
                     int i = 0;
                     for (Food food : foods) {
-                        foodList.getItems().add(food.getName());
                         System.out.println(++i + ". " + food.getName());
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/food.fxml"));

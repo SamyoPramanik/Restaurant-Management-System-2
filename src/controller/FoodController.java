@@ -129,12 +129,14 @@ public class FoodController {
         foodRestaurant.setText(restaurant);
 
         buttonVisibility();
+        this.isDelivered.setVisible(true);
+        this.isDelivered.setManaged(true);
 
-        if (isDelivered) {
+        if (isDelivered)
             this.isDelivered.setText("Delivered");
-            this.isDelivered.setVisible(true);
-            this.isDelivered.setManaged(true);
-        }
+
+        else
+            this.isDelivered.setText("Pending");
     }
 
     public void set(Order order) {
