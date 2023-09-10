@@ -39,4 +39,16 @@ public class ResCategory {
         list.add(new String(restaurant));
     }
 
+    public boolean hasRestaurant(String restaurant) {
+        for (String s : list) {
+            if (s.equalsIgnoreCase(restaurant))
+                return true;
+        }
+        return false;
+    }
+
+    public void removeRestaurant(String restaurant) {
+        list.remove(restaurant);
+    }
+
 }

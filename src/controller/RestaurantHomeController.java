@@ -82,7 +82,7 @@ public class RestaurantHomeController implements Initializable {
 
     @FXML
     void showuser(ActionEvent event) {
-
+        main.showRestaurantUser();
     }
 
     @FXML

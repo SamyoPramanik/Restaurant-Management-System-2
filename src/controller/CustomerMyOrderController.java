@@ -51,7 +51,7 @@ public class CustomerMyOrderController {
 
                 foodController.set(food, food.getName(), food.getCategory(), food.getPrice()
                         + "",
-                        food.getResName());
+                        food.getResName(), order.isAccepted());
                 orderlist1.getChildren().add(0, pane);
             }
         } catch (Exception e) {

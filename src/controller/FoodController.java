@@ -31,6 +31,9 @@ public class FoodController {
     private Label foodRestaurant;
 
     @FXML
+    private Label isDelivered;
+
+    @FXML
     public Button addButton;
 
     @FXML
@@ -62,7 +65,9 @@ public class FoodController {
         ((RestaurantOrdersController) main).deliverOrder(order);
         deliverButton.setVisible(false);
         deliverButton.setManaged(false);
-        foodRestaurant.setText("Delivered");
+        isDelivered.setText("Delivered");
+        isDelivered.setVisible(true);
+        isDelivered.setManaged(true);
 
     }
 
@@ -79,6 +84,8 @@ public class FoodController {
         deliverButton.setManaged(false);
         removeButton.setVisible(false);
         removeButton.setManaged(false);
+        isDelivered.setVisible(false);
+        isDelivered.setManaged(false);
 
         if (main instanceof CartController) {
             removeButton.setVisible(true);
@@ -114,6 +121,22 @@ public class FoodController {
         buttonVisibility();
     }
 
+    public void set(Food food, String name, String category, String price, String restaurant, boolean isDelivered) {
+        this.food = food;
+        foodName.setText(name);
+        foodCategory.setText(category);
+        foodPrice.setText("$" + price);
+        foodRestaurant.setText(restaurant);
+
+        buttonVisibility();
+
+        if (isDelivered) {
+            this.isDelivered.setText("Delivered");
+            this.isDelivered.setVisible(true);
+            this.isDelivered.setManaged(true);
+        }
+    }
+
     public void set(Order order) {
         this.order = order;
         this.food = order.getFood();
@@ -125,9 +148,11 @@ public class FoodController {
         buttonVisibility();
 
         if (order.isAccepted()) {
-            foodRestaurant.setText("Delivered");
+            isDelivered.setText("Delivered");
             deliverButton.setVisible(false);
             deliverButton.setManaged(false);
+            isDelivered.setVisible(true);
+            isDelivered.setManaged(true);
         }
 
     }

@@ -26,22 +26,29 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="foodRestaurant" prefWidth="300.0" text="Label">
+                  <HBox prefHeight="20.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets top="6.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
+                     <children>
+                        <Label fx:id="foodRestaurant" prefHeight="20.0" prefWidth="333.0" text="Label">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <VBox prefHeight="70.0" prefWidth="99.0">
                <children>
-                  <Label fx:id="foodPrice" alignment="CENTER" prefHeight="27.0" prefWidth="102.0" text="Label">
+                  <Label fx:id="foodPrice" alignment="TOP_RIGHT" prefHeight="27.0" prefWidth="102.0" text="Label">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
                   </Label>
                   <Button fx:id="addButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="38.0" prefWidth="97.0" styleClass="logoButtons" text="Add To Cart">
                      <VBox.margin>
@@ -94,6 +101,14 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
+                  <Label fx:id="isDelivered" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="98.0" text="heool">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
             </VBox>
          </children>

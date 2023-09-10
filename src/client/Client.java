@@ -81,7 +81,7 @@ public class Client {
             admin = (Admin) response.getData();
             System.out.println(admin.getName());
             stage.close();
-            showAdminHome(admin);
+            new AdminUser(nu, admin);
         }
 
         else if (response.getMessage().equals("customer")) {
@@ -91,7 +91,7 @@ public class Client {
         }
 
         else if (response.getMessage().equals("restaurant")) {
-            int restaurant = (int) response.getData();
+            RestaurantInfo restaurant = (RestaurantInfo) response.getData();
             stage.close();
             new RestaurantUser(nu, restaurant);
         }

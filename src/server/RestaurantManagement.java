@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import requests.GetAllCount;
+import requests.GetRestaurantInfo;
 import util.Admin;
 import util.Customer;
 import util.Food;
@@ -14,6 +16,7 @@ import util.Order;
 import util.ResCategory;
 import util.Response;
 import util.Restaurant;
+import util.RestaurantInfo;
 import util.User;
 
 public class RestaurantManagement {
@@ -94,6 +97,78 @@ public class RestaurantManagement {
                 categories.add(rc);
             }
         }
+    }
+
+    synchronized public Response insertRestaurant(RestaurantInfo res) {
+        String name = res.resName;
+        double score = res.score;
+        String price = "0";
+        String zipcode = res.zipcode;
+        String category1 = res.category1;
+        String category2 = res.category2;
+        String category3 = res.category3;
+        String username = res.username;
+        String password = res.password;
+
+        if (hasRestaurant(name))
+            return new Response("Restaurant already exists", null);
+
+        if (hasUser(username))
+            return new Response("Username already exists", null);
+
+        String category[] = { category1, category2, category3 };
+
+        restaurantList
+                .add(new Restaurant(restaurantList.size() + 1, name, score, price, zipcode, category[0], category[1],
+                        category[2]));
+
+        userList.add(new User(username, password, "restaurant", restaurantList.size()));
+
+        for (String c : category) {
+            if (c.isEmpty())
+                continue;
+            boolean found = false;
+            for (ResCategory rc : categories) {
+                if (rc.getName().equalsIgnoreCase(c)) {
+                    found = true;
+                    rc.addRestaurant(name);
+                }
+            }
+
+            if (!found) {
+                ResCategory rc = new ResCategory(c);
+                rc.addRestaurant(name);
+                categories.add(rc);
+            }
+        }
+        increaseUpdate();
+        return new Response("added", null);
+    }
+
+    synchronized public Response updatRestaurant(RestaurantInfo restaurant, RestaurantInfo updateRestaurant) {
+        String name = restaurant.resName;
+        String updateName = updateRestaurant.resName;
+
+        if (hasRestaurant(updateName) && name.equalsIgnoreCase(updateName) == false)
+            return new Response("Restaurant cannot be updated", null);
+
+        for (Restaurant r : restaurantList) {
+            if (r.getName().equalsIgnoreCase(name)) {
+                r.update(updateRestaurant);
+                break;
+            }
+        }
+
+        for (ResCategory rc : categories) {
+            if (rc.hasRestaurant(name)) {
+                rc.removeRestaurant(name);
+                rc.addRestaurant(updateName);
+                break;
+            }
+        }
+
+        increaseUpdate();
+        return new Response("Restaurant updated", null);
     }
 
     synchronized public Response insertFood(int restaurantId, String category, String name, double price) {
@@ -207,7 +282,9 @@ public class RestaurantManagement {
                 else if (u.getType().equals("restaurant")) {
                     for (Restaurant r : restaurantList) {
                         if (r.getId() == u.getId()) {
-                            Response response = new Response("restaurant", r.getId());
+                            Response response = new Response("restaurant",
+                                    new RestaurantInfo(r.getId(), r.getName(), r.getScore(),
+                                            r.getZipcode(), r.getCategory1(), r.getCategory2(), r.getCategory3()));
                             return response;
                         }
                     }
@@ -519,6 +596,28 @@ public class RestaurantManagement {
         return false;
     }
 
+    boolean hasUser(String username) {
+        for (User u : userList) {
+            if (u.getUsername().equals(username)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Response getRestaurantInfo(int id) {
+        for (Restaurant r : restaurantList) {
+            if (r.getId() == id) {
+                return new Response("Restaurant found",
+                        new RestaurantInfo(r.getId(), r.getName(), r.getScore(), r.getZipcode(),
+                                r.getCategory1(), r.getCategory2(), r.getCategory3()));
+            }
+        }
+
+        return new Response("Restaurant not found", null);
+    }
+
     void searchFood() {
         while (true) {
             System.out.println("\nFood Item Searching Options:\r\n" + //
@@ -732,6 +831,11 @@ public class RestaurantManagement {
                 }
             }
         }
+    }
+
+    public Response getAllCount() {
+        return new Response("count", new GetAllCount(restaurantList.size(), customerList.size(),
+                foodList.size()));
     }
 
     synchronized public void saveAll() throws Exception {

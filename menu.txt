@@ -354,3 +354,6 @@
 1,chap,3 chap,20.0
 1,chicken,100 chicken leg,25.0
 1,chicken,1000 chicken leg,25.0
+1,chicken,Mim Special Sandwitch,25.0
+10,Sweets,Healthy Sweets,20.0
+12,Biriani,Kacci Biriani,100.0

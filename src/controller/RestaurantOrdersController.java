@@ -33,6 +33,7 @@ public class RestaurantOrdersController {
 
     @FXML
     void showuser(ActionEvent event) {
+        main.showRestaurantUser();
 
     }
 

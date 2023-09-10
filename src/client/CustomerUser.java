@@ -48,31 +48,6 @@ public class CustomerUser {
 
     public void showCustomerHome() {
         try {
-            // while (true) {
-            // System.out.println("1.Search Food");
-            // System.out.println("2.Logout");
-
-            // Scanner sc = new Scanner(System.in);
-            // int choice = Integer.parseInt(sc.nextLine());
-            // if (choice == 1) {
-            // System.out.println("Enter Food Name: ");
-            // String foodName = sc.nextLine();
-
-            // nu.write(new SearchFood(foodName, "name"));
-            // isOrderCheckingRunning = false;
-            // SendRequest SearchFoodThread = new SendRequest(this);
-            // SearchFoodThread.join();
-
-            // if (response != null && response.getMessage().equals("found")) {
-            // ArrayList<Food> foods = (ArrayList<Food>) response.getData();
-
-            // for (int i = 1; i <= foods.size(); i++)
-            // System.out.println(i + ". " + foods.get(i - 1).getName());
-            // showOrderFood(foods);
-            // }
-
-            // }
-            // }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/customerHome.fxml"));
             Parent root = loader.load();
             controller = loader.getController();
@@ -81,6 +56,7 @@ public class CustomerUser {
             controller.curtButton.setText(cart.size() + "");
 
             stg.setScene(new Scene(root));
+            stg.setTitle("Home - " + customer.getName());
             stg.setResizable(false);
             stg.show();
         } catch (Exception e) {
@@ -103,6 +79,7 @@ public class CustomerUser {
             controller.loadOrders(orders);
 
             stg.setScene(new Scene(root));
+            stg.setTitle("My Order - " + customer.getName());
             stg.setResizable(false);
             stg.show();
         } catch (Exception e) {
@@ -145,7 +122,7 @@ public class CustomerUser {
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("User");
+            stage.setTitle(customer.getName());
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();

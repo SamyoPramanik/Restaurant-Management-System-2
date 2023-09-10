@@ -226,4 +226,13 @@ public class Restaurant implements java.io.Serializable {
         System.out.println();
     }
 
+    public void update(RestaurantInfo updateRestaurant) {
+        name = updateRestaurant.resName;
+        score = updateRestaurant.score;
+        zipcode = updateRestaurant.zipcode;
+        category1 = updateRestaurant.category1;
+        category2 = updateRestaurant.category2;
+        category3 = updateRestaurant.category3;
+    }
+
 }

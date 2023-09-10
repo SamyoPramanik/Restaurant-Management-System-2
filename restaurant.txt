@@ -7,3 +7,6 @@
 7,Chipotle,4.6,$,98346,Mexican,Fast Food,
 8,Red Lobster,4.4,$$,98346,Seafood,Family Meals,American
 9,Red Robin,4.4,$$,98346,Burgers,American,Family Meals
+10,Samyo Kitchen,0.0,0,kitchen,6000,,
+11,Hello Kitchen,0.0,0,10000,kitchen,,
+12,Samyo Special Restaurant,0.0,0,1000,kitchen,,

@@ -54,43 +54,52 @@ public class ServerRequestThread implements Runnable {
                 else if (request instanceof SearchRestaurant) {
                     SearchRestaurant search = (SearchRestaurant) request;
 
+                    ArrayList<RestaurantInfo> r = new ArrayList<>();
+                    ArrayList<Restaurant> restaurants = null;
                     if (search.by.equals("name")) {
-                        ArrayList<Restaurant> r = res.searchRestaurantByName(search.str);
-
-                        Response response = new Response("found", r);
-                        nu.write(response);
+                        restaurants = res.searchRestaurantByName(search.str);
 
                     }
 
                     else if (search.by.equals("category")) {
-                        ArrayList<Restaurant> r = res.searchRestaurantByCategory(search.str);
-
-                        Response response = new Response("found", r);
-                        nu.write(response);
-                    }
-
-                    else if (search.by.equals("price")) {
-                        ArrayList<Restaurant> r = res.searchRestaurantByPrice(search.str);
-
-                        Response response = new Response("found", r);
-                        nu.write(response);
+                        restaurants = res.searchRestaurantByCategory(search.str);
                     }
 
                     else if (search.by.equals("zipcode")) {
-                        ArrayList<Restaurant> r = res.searchRestaurantByZipCode(search.str);
-
-                        Response response = new Response("found", r);
-                        nu.write(response);
+                        restaurants = res.searchRestaurantByZipCode(search.str);
                     }
 
-                    else if (search.by.equals("score")) {
-                        ArrayList<Restaurant> r = res.searchRestaurantByScore(search.minScore,
-                                search.maxScore);
-
-                        Response response = new Response("found", r);
-                        nu.write(response);
+                    for (Restaurant restaurant : restaurants) {
+                        r.add(new RestaurantInfo(restaurant.getId(), restaurant.getName(), restaurant.getScore(),
+                                restaurant.getZipcode(),
+                                restaurant.getCategory1(),
+                                restaurant.getCategory2(), restaurant.getCategory3()));
                     }
 
+                    System.out.println("total restaurants: " + r.size());
+
+                    Response response = new Response("found", r);
+                    nu.write(response);
+
+                }
+
+                else if (request instanceof AddRestaurant) {
+                    System.out.println("Add Restaurant request");
+                    AddRestaurant addRestaurant = (AddRestaurant) request;
+                    Response response = res.insertRestaurant(addRestaurant.restaurant);
+                    System.out.println(response.getMessage());
+                    nu.write(response);
+                    System.out.println("Add Restaurant response sent");
+                }
+
+                else if (request instanceof UpdateRestaurant) {
+                    System.out.println("Update Restaurant request");
+                    UpdateRestaurant updateRestaurant = (UpdateRestaurant) request;
+                    Response response = res.updatRestaurant(updateRestaurant.restaurant,
+                            updateRestaurant.updateRestaurant);
+                    System.out.println(response.getMessage());
+                    nu.write(response);
+                    System.out.println("Update Restaurant response sent");
                 }
 
                 else if (request instanceof SearchFood) {
@@ -203,8 +212,21 @@ public class ServerRequestThread implements Runnable {
                     System.out.println("order delivered");
                 }
 
+                else if (request instanceof GetRestaurantInfo) {
+                    GetRestaurantInfo getRestaurantInfo = (GetRestaurantInfo) request;
+                    Response response = res.getRestaurantInfo(getRestaurantInfo.resId);
+                    nu.write(response);
+                }
+
+                else if (request instanceof GetAllCount) {
+                    Response response = res.getAllCount();
+                    nu.write(response);
+                }
+
             }
-        } catch (Exception e) {
+        } catch (
+
+        Exception e) {
             System.out.println("Error: " + e);
         }
     }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 import controller.FoodAddEditController;
 import controller.RestaurantHomeController;
 import controller.RestaurantOrdersController;
+import controller.RestaurantUserController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import requests.AddFood;
 import requests.CheckNewOrder;
 import requests.DeliverOrder;
+import requests.GetRestaurantInfo;
 import requests.RestaurantGetOrder;
 import requests.SearchFood;
 import requests.SearchFoodGivenRestaurant;
@@ -25,6 +27,7 @@ import util.Food;
 import util.NetworkUtil;
 import util.Order;
 import util.Response;
+import util.RestaurantInfo;
 
 public class RestaurantUser {
     public NetworkUtil nu;
@@ -38,10 +41,12 @@ public class RestaurantUser {
     FoodAddEditController foodAddEditController;
     RestaurantOrdersController ordersController;
     int newOrderCount = 0;
+    RestaurantInfo info;
 
-    public RestaurantUser(NetworkUtil nu, int resId) {
+    public RestaurantUser(NetworkUtil nu, RestaurantInfo info) {
         this.nu = nu;
-        this.resId = resId;
+        this.info = info;
+        this.resId = info.resId;
         stg = new Stage();
         isNewOrderChecking = true;
 
@@ -70,6 +75,7 @@ public class RestaurantUser {
 
             stg.setScene(new Scene(root));
             stg.setResizable(false);
+            stg.setTitle("Home - " + info.resName);
             stg.show();
 
         } catch (
@@ -93,6 +99,7 @@ public class RestaurantUser {
             ordersController.setMain(this);
             stg.setScene(new Scene(root));
             stg.setResizable(false);
+            stg.setTitle("Orders - " + info.resName);
             stg.show();
 
             isNewOrderChecking = false;
@@ -100,6 +107,37 @@ public class RestaurantUser {
 
         } catch (Exception e) {
             System.out.println("Error: in RestaurantUser showOrders " + e);
+        }
+    }
+
+    public void showRestaurantUser() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/restaurantUser.fxml"));
+            Parent root = loader.load();
+            RestaurantUserController res = loader.getController();
+            // res.setMain(this);
+            isNewOrderChecking = false;
+            nu.write(new GetRestaurantInfo(resId));
+            Object o = nu.read();
+            if (o instanceof Response) {
+                response = (Response) o;
+            }
+
+            RestaurantInfo info = (RestaurantInfo) response.getData();
+            res.set(info);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle(info.resName);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+            isNewOrderChecking = true;
+            notifyAll();
+
+        } catch (Exception e) {
+            System.out.println("Error: in RestaurantUser showUser " + e);
         }
     }
 
@@ -165,6 +203,7 @@ public class RestaurantUser {
 
             newFoodStg = new Stage();
             newFoodStg.setScene(new Scene(root));
+            newFoodStg.setTitle("Edit Food - " + food.getName());
             newFoodStg.setResizable(false);
             newFoodStg.initModality(Modality.APPLICATION_MODAL);
             newFoodStg.show();
