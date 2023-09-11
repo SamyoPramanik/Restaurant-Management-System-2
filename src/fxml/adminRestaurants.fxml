@@ -27,10 +27,6 @@
                      <VBox.margin>
                         <Insets />
                      </VBox.margin></Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="200.0" styleClass="navButton" text="Button" textAlignment="CENTER">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin></Button>
                </children>
             </VBox>
          </left>

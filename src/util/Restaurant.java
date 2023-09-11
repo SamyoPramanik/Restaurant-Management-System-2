@@ -84,8 +84,8 @@ public class Restaurant implements java.io.Serializable {
     }
 
     public boolean hasCategory(String category) {
-        return category1.equalsIgnoreCase(category) || category2.equalsIgnoreCase(category)
-                || category3.equalsIgnoreCase(category);
+        return isContains(category1, category) || isContains(category2, category)
+                || isContains(category3, category);
     }
 
     public void addFood(String category, String name, double price) {

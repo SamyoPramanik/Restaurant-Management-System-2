@@ -18,7 +18,6 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#showHome" prefWidth="200.0" styleClass="navButton" text="Home" />
                   <Button mnemonicParsing="false" prefWidth="200.0" styleClass="curButton" text="My Orders" />
-                  <Button mnemonicParsing="false" prefWidth="200.0" styleClass="navButton" text="Button" />
                </children>
             </VBox>
          </left>

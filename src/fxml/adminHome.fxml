@@ -20,7 +20,6 @@
                <children>
                   <Button mnemonicParsing="false" prefWidth="200.0" styleClass="curButton" text="Home" />
                   <Button mnemonicParsing="false" onAction="#showRestaurants" prefWidth="200.0" styleClass="navButton" text="Restaurants" />
-                  <Button mnemonicParsing="false" prefWidth="200.0" styleClass="navButton" text="Button" />
                </children>
             </VBox>
          </left>

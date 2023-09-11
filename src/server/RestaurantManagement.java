@@ -426,7 +426,7 @@ public class RestaurantManagement {
         ArrayList<Restaurant> res = new ArrayList<Restaurant>();
 
         for (Restaurant r : restaurantList) {
-            if (r.getZipcode().equalsIgnoreCase(zipcode)) {
+            if (isContains(r.getZipcode(), zipcode)) {
                 res.add(r);
             }
         }

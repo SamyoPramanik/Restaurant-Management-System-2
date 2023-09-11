@@ -31,7 +31,6 @@
                            </font>
                         </Label>
                      </graphic></Button>
-                  <Button mnemonicParsing="false" prefWidth="200.0" styleClass="navButton" text="Button" />
                </children>
             </VBox>
          </left>

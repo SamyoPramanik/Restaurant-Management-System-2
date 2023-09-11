@@ -11,3 +11,4 @@
 11,Hello Kitchen,0.0,0,10000,kitchen,,
 12,Samyo Special Restaurant,0.0,0,1000,kitchen,,
 13,JKL,0.0,0,454,sdfsd,,
+14,Hello Kitchen 2,0.0,0,10000,hi,hello,ki
