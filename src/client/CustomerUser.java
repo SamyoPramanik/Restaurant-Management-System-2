@@ -54,7 +54,7 @@ public class CustomerUser {
             controller = loader.getController();
 
             controller.setMain(this);
-            controller.curtButton.setText(cart.size() + "");
+            controller.curtButton.setText(orderCount + "");
 
             stg.setScene(new Scene(root));
             stg.setTitle("Home - " + customer.getName());
