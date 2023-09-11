@@ -31,6 +31,9 @@ public class FoodController {
     private Label foodRestaurant;
 
     @FXML
+    private Label orderCount;
+
+    @FXML
     private Label isDelivered;
 
     @FXML
@@ -52,7 +55,7 @@ public class FoodController {
 
     @FXML
     void removeFromCart(ActionEvent event) {
-        ((CartController) main).removeFromCart(food);
+        ((CartController) main).removeFromCart(order);
     }
 
     @FXML
@@ -86,8 +89,12 @@ public class FoodController {
         removeButton.setManaged(false);
         isDelivered.setVisible(false);
         isDelivered.setManaged(false);
+        orderCount.setVisible(false);
+        orderCount.setManaged(false);
 
         if (main instanceof CartController) {
+            orderCount.setVisible(true);
+            orderCount.setManaged(true);
             removeButton.setVisible(true);
             removeButton.setManaged(true);
         }
@@ -98,6 +105,18 @@ public class FoodController {
         }
 
         else if (main instanceof CustomerMyOrderController) {
+            orderCount.setVisible(true);
+            orderCount.setManaged(true);
+            isDelivered.setVisible(true);
+            isDelivered.setManaged(true);
+
+            if (order.isAccepted()) {
+                isDelivered.setText("Delivered");
+            }
+
+            else {
+                isDelivered.setText("Pending");
+            }
         }
 
         else if (main instanceof RestaurantHomeController) {
@@ -106,37 +125,32 @@ public class FoodController {
         }
 
         else if (main instanceof RestaurantOrdersController) {
-            deliverButton.setVisible(true);
-            deliverButton.setManaged(true);
+            if (order.isAccepted()) {
+                isDelivered.setText("Delivered");
+                deliverButton.setVisible(false);
+                deliverButton.setManaged(false);
+                isDelivered.setVisible(true);
+                isDelivered.setManaged(true);
+            }
+
+            else {
+                deliverButton.setVisible(true);
+                deliverButton.setManaged(true);
+            }
+
+            orderCount.setVisible(true);
+            orderCount.setManaged(true);
         }
     }
 
-    public void set(Food food, String name, String category, String price, String restaurant) {
+    public void set(Food food) {
         this.food = food;
-        foodName.setText(name);
-        foodCategory.setText(category);
-        foodPrice.setText("$" + price);
-        foodRestaurant.setText(restaurant);
+        foodName.setText(food.getName());
+        foodCategory.setText(food.getCategory());
+        foodPrice.setText("$" + food.getPrice());
+        foodRestaurant.setText(food.getResName());
 
         buttonVisibility();
-    }
-
-    public void set(Food food, String name, String category, String price, String restaurant, boolean isDelivered) {
-        this.food = food;
-        foodName.setText(name);
-        foodCategory.setText(category);
-        foodPrice.setText("$" + price);
-        foodRestaurant.setText(restaurant);
-
-        buttonVisibility();
-        this.isDelivered.setVisible(true);
-        this.isDelivered.setManaged(true);
-
-        if (isDelivered)
-            this.isDelivered.setText("Delivered");
-
-        else
-            this.isDelivered.setText("Pending");
     }
 
     public void set(Order order) {
@@ -144,18 +158,10 @@ public class FoodController {
         this.food = order.getFood();
         foodName.setText(food.getName());
         foodCategory.setText(food.getCategory());
+        orderCount.setText(order.getOrderCount() + "");
         foodPrice.setText("$" + food.getPrice());
-        foodRestaurant.setText("Ordered by: " + order.getCustomerName());
+        foodRestaurant.setText(food.getResName());
 
         buttonVisibility();
-
-        if (order.isAccepted()) {
-            isDelivered.setText("Delivered");
-            deliverButton.setVisible(false);
-            deliverButton.setManaged(false);
-            isDelivered.setVisible(true);
-            isDelivered.setManaged(true);
-        }
-
     }
 }

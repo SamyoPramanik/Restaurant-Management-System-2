@@ -42,11 +42,7 @@ public class CustomerMyOrderController {
                 FoodController foodController = loader.getController();
                 foodController.setMain(this);
 
-                Food food = order.getFood();
-
-                foodController.set(food, food.getName(), food.getCategory(), food.getPrice()
-                        + "",
-                        food.getResName(), order.isAccepted());
+                foodController.set(order);
                 orderlist1.getChildren().add(0, pane);
             }
         } catch (Exception e) {

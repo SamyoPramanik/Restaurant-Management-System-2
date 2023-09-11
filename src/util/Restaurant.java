@@ -196,7 +196,7 @@ public class Restaurant implements java.io.Serializable {
 
     synchronized public void addNewOrder(Order o) {
         orders.add(0, o);
-        newOrderCount++;
+        newOrderCount += o.getOrderCount();
     }
 
     public int getNewOrderCount() {

@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import util.Food;
+import util.Order;
 
 public class CartController {
 
@@ -38,22 +39,21 @@ public class CartController {
         this.main = main;
     }
 
-    public void loadCart(ArrayList<Food> cart) throws IOException {
+    public void loadCart(ArrayList<Order> cart) throws IOException {
         orderList.getChildren().clear();
-        for (Food food : cart) {
+        for (Order order : cart) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/food.fxml"));
             Pane pane = loader.load();
             FoodController foodController = loader.getController();
 
             foodController.setMain(this);
-            foodController.set(food, food.getName(), food.getCategory(), food.getPrice() + "",
-                    food.getResName());
+            foodController.set(order);
             orderList.getChildren().add(pane);
         }
     }
 
-    public void removeFromCart(Food food) {
-        main.removeFromCart(food);
+    public void removeFromCart(Order order) {
+        main.removeFromCart(order);
     }
 
 }

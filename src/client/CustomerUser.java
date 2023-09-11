@@ -26,9 +26,10 @@ public class CustomerUser {
     CustomerHomeController controller;
     CartController cartController;
     public double totalCost = 0;
+    public int orderCount = 0;
     Stage stg;
     Stage cartStage;
-    volatile public ArrayList<Food> cart = new ArrayList<>();
+    volatile public ArrayList<Order> cart = new ArrayList<>();
 
     public CustomerUser(NetworkUtil nu, Customer customer) throws ClassNotFoundException, IOException {
         this.nu = nu;
@@ -96,8 +97,8 @@ public class CustomerUser {
 
             cartController.setMain(this);
             cartController.loadCart(cart);
-            cartController.orderCount.setText("Cart: " + cart.size() + " items");
-            cartController.totalCost.setText("Total cost: $" + totalCost);
+            cartController.orderCount.setText("Cart: " + orderCount + " items");
+            cartController.totalCost.setText("Total cost: $" + String.format("%.2f", totalCost));
 
             cartStage = new Stage();
             cartStage.setScene(new Scene(root));
@@ -131,13 +132,32 @@ public class CustomerUser {
         }
     }
 
-    public void removeFromCart(Food food) {
+    public void addToCart(Food food) {
+        for (Order order : cart) {
+            if (order.getFood().getResId() == food.getResId() && order.getFood().getName()
+                    .equals(food.getName()) && order.getFood().getCategory().equals(food.getCategory())) {
+                order.increaseCount();
+                totalCost += food.getPrice();
+                orderCount++;
+                controller.curtButton.setText(orderCount + "");
+                return;
+            }
+        }
+
+        cart.add(new Order(customer.getId(), food, 1, false));
+        totalCost += food.getPrice();
+        orderCount++;
+        controller.curtButton.setText(orderCount + "");
+    }
+
+    public void removeFromCart(Order order) {
         try {
-            cart.remove(food);
-            totalCost -= food.getPrice();
-            cartController.orderCount.setText("Cart: " + cart.size() + " items");
-            cartController.totalCost.setText("Total cost: $" + totalCost);
-            controller.curtButton.setText(cart.size() + "");
+            cart.remove(order);
+            totalCost -= order.getFood().getPrice() * order.getOrderCount();
+            orderCount -= order.getOrderCount();
+            cartController.orderCount.setText("Cart: " + orderCount + " items");
+            cartController.totalCost.setText("Total cost: $" + String.format("%.2f", totalCost));
+            controller.curtButton.setText(orderCount + "");
             cartController.loadCart(cart);
         } catch (Exception e) {
             System.out.println("Error: in removeFromCart " + e);
@@ -204,8 +224,8 @@ public class CustomerUser {
                 controller.curtButton.setText("0");
                 cartStage.close();
 
-                for (Food food : cart) {
-                    nu.write(new Order(customer.getId(), food, false));
+                for (Order order : cart) {
+                    nu.write(order);
                     Object o = nu.read();
                 }
                 cart.clear();

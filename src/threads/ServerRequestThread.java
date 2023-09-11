@@ -151,8 +151,7 @@ public class ServerRequestThread implements Runnable {
 
                 else if (request instanceof Order) {
                     Order order = (Order) request;
-                    Response response = res.addNewOrder(order.getCustomerId(), order.getFood(), order.getResId(),
-                            order.isAccepted());
+                    Response response = res.addNewOrder(order);
                     nu.write(response);
                 }
 

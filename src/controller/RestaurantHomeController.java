@@ -128,9 +128,7 @@ public class RestaurantHomeController implements Initializable {
                         FoodController foodController = loader.getController();
                         foodController.setMain(this);
 
-                        foodController.set(food, food.getName(), food.getCategory(), food.getPrice()
-                                + "",
-                                food.getResName());
+                        foodController.set(food);
                         foodList1.getChildren().add(pane);
                     }
                 } catch (Exception e) {

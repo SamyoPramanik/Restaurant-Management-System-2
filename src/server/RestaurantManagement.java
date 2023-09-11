@@ -301,7 +301,7 @@ public class RestaurantManagement {
 
     }
 
-    private void addOrder(int id, int customerId, Food food, int restaurantId, boolean isAccepted) {
+    private void addOrder(int id, int customerId, Food food, int orderCount, int restaurantId, boolean isAccepted) {
         Customer customer = null;
 
         totalOrder = Integer.max(id, totalOrder);
@@ -309,7 +309,7 @@ public class RestaurantManagement {
         for (Customer c : customerList) {
             if (c.getId() == customerId) {
                 customer = c;
-                Order o = new Order(id, customerId, food, isAccepted);
+                Order o = new Order(id, customerId, food, orderCount, isAccepted);
                 c.addOrder(o);
                 break;
             }
@@ -317,7 +317,7 @@ public class RestaurantManagement {
 
         for (Restaurant r : restaurantList) {
             if (r.getId() == restaurantId) {
-                Order o = new Order(id, customerId, customer.getName(), food, isAccepted);
+                Order o = new Order(id, customerId, customer.getName(), food, orderCount, isAccepted);
                 r.addOrder(o);
                 food = r.searchFood(food.getName(), food.getCategory());
                 break;
@@ -326,16 +326,17 @@ public class RestaurantManagement {
 
     }
 
-    synchronized public Response addNewOrder(int customerId, Food food, int restaurantId, boolean isAccepted) {
+    synchronized public Response addNewOrder(Order order) {
         Boolean orderInRestaurant = false, orderInCustomer = false;
         Customer customer = null;
 
         int id = ++totalOrder;
 
         for (Customer c : customerList) {
-            if (c.getId() == customerId) {
+            if (c.getId() == order.getCustomerId()) {
                 customer = c;
-                Order o = new Order(id, customerId, food, isAccepted);
+                Order o = new Order(id, order.getCustomerId(), order.getFood(), order.getOrderCount(),
+                        order.isAccepted());
                 c.addOrder(o);
                 orderInCustomer = true;
                 break;
@@ -343,8 +344,9 @@ public class RestaurantManagement {
         }
 
         for (Restaurant r : restaurantList) {
-            if (r.getId() == restaurantId) {
-                Order o = new Order(id, customerId, customer.getName(), food, isAccepted);
+            if (r.getId() == order.getResId()) {
+                Order o = new Order(id, order.getCustomerId(), customer.getName(), order.getFood(),
+                        order.getOrderCount(), order.isAccepted());
                 r.addNewOrder(o);
                 orderInRestaurant = true;
                 break;
@@ -874,6 +876,7 @@ public class RestaurantManagement {
             for (Order o : c.getOrders()) {
                 br.write(o.getId() + "," +
                         o.getCustomerId() + "," + o.getFood().getName() + "," + o.getFood().getCategory() + ","
+                        + o.getOrderCount() + ","
                         + o.getResId() + "," + (o.isAccepted() ? 1 : 0) + "\n");
             }
         }
@@ -976,13 +979,14 @@ public class RestaurantManagement {
             int customerId = Integer.parseInt(parts[1]);
             String foodName = parts[2];
             String foodCategory = parts[3];
-            int restaurantId = Integer.parseInt(parts[4]);
-            int isAccepted = Integer.parseInt(parts[5]);
+            int orderCount = Integer.parseInt(parts[4]);
+            int restaurantId = Integer.parseInt(parts[5]);
+            int isAccepted = Integer.parseInt(parts[6]);
 
             for (Restaurant r : restaurantList)
                 if (r.getId() == restaurantId) {
                     Food food = r.searchFood(foodName, foodCategory);
-                    addOrder(id, customerId, food, r.getId(), isAccepted == 1 ? true : false);
+                    addOrder(id, customerId, food, orderCount, r.getId(), isAccepted == 1 ? true : false);
                     break;
                 }
         }

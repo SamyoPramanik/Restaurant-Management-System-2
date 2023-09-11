@@ -126,9 +126,7 @@ public class CustomerHomeController implements Initializable {
                         FoodController foodController = loader.getController();
                         foodController.setMain(this);
 
-                        foodController.set(food, food.getName(), food.getCategory(), food.getPrice()
-                                + "",
-                                food.getResName());
+                        foodController.set(food);
                         foodList1.getChildren().add(pane);
                     }
                 } catch (Exception e) {
@@ -143,10 +141,7 @@ public class CustomerHomeController implements Initializable {
     }
 
     public void addToCart(Food food) {
-        main.cart.add(0, food);
-        main.totalCost += food.getPrice();
-        curtButton.setText(main.cart.size() + "");
-
+        main.addToCart(food);
     }
 
     public void setMain(CustomerUser main) {

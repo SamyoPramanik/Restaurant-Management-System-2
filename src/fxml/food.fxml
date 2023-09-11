@@ -36,6 +36,14 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
+                        <Label fx:id="orderCount" alignment="TOP_RIGHT" prefHeight="20.0" prefWidth="82.0" text="1">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
                      </children>
                   </HBox>
                </children>

@@ -5,33 +5,38 @@ public class Order implements java.io.Serializable {
     private int customerId;
     private String customerName;
     private Food food;
+    private int orderCount;
     Boolean isAccepted;
 
-    public Order(int customerId, Food food, Boolean isAccepted) {
+    public Order(int customerId, Food food, int orderCount, Boolean isAccepted) {
         this.customerId = customerId;
         this.food = food;
+        this.orderCount = orderCount;
         this.isAccepted = isAccepted;
     }
 
-    public Order(int customerId, String customerName, Food food, Boolean isAccepted) {
+    public Order(int customerId, String customerName, Food food, int orderCount, Boolean isAccepted) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.food = food;
+        this.orderCount = orderCount;
         this.isAccepted = isAccepted;
     }
 
-    public Order(int id, int customerId, Food food, Boolean isAccepted) {
+    public Order(int id, int customerId, Food food, int orderCount, Boolean isAccepted) {
         this.id = id;
         this.customerId = customerId;
         this.food = food;
+        this.orderCount = orderCount;
         this.isAccepted = isAccepted;
     }
 
-    public Order(int id, int customerId, String customerName, Food food, Boolean isAccepted) {
+    public Order(int id, int customerId, String customerName, Food food, int orderCount, Boolean isAccepted) {
         this.id = id;
         this.customerId = customerId;
         this.customerName = customerName;
         this.food = food;
+        this.orderCount = orderCount;
         this.isAccepted = isAccepted;
     }
 
@@ -83,5 +88,17 @@ public class Order implements java.io.Serializable {
 
     public boolean isAccepted() {
         return isAccepted;
+    }
+
+    public void increaseCount() {
+        orderCount++;
+    }
+
+    public void setOrderCount(int orderCount) {
+        this.orderCount = orderCount;
+    }
+
+    public int getOrderCount() {
+        return orderCount;
     }
 }
