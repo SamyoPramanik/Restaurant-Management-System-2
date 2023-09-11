@@ -229,6 +229,8 @@ public class CustomerUser {
                     Object o = nu.read();
                 }
                 cart.clear();
+                orderCount = 0;
+                totalCost = 0;
             }
         } catch (Exception e) {
             System.out.println("Error: in orderFood " + e);

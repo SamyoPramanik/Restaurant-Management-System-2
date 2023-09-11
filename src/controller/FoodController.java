@@ -140,6 +140,7 @@ public class FoodController {
 
             orderCount.setVisible(true);
             orderCount.setManaged(true);
+            foodRestaurant.setText("Order by: " + order.getCustomerName());
         }
     }
 
@@ -159,7 +160,7 @@ public class FoodController {
         foodName.setText(food.getName());
         foodCategory.setText(food.getCategory());
         orderCount.setText(order.getOrderCount() + "");
-        foodPrice.setText("$" + food.getPrice());
+        foodPrice.setText("$" + String.format("%.2f", food.getPrice() * order.getOrderCount()));
         foodRestaurant.setText(food.getResName());
 
         buttonVisibility();

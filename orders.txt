@@ -1,7 +1,39 @@
+30,3,Iced Lemon Loaf,Bakery,2,3,0
+31,3,New! Iced Cold Brew Coffee,Beverages,1,2,0
+32,3,Medium Unsweetened Iced Tea,Beverages,4,4,0
+33,3,New! Iced Cold Brew Coffee,Beverages,8,2,0
+34,3,New! Iced Cold Brew Coffee,Beverages,2,2,0
+35,3,Iced Lemon Loaf,Bakery,3,3,0
+36,3,Iced Lemon Loaf,Bakery,4,3,0
+37,3,10 chicken chap,chap,5,1,0
+38,3,Jr. Chicken and Waffles,Kids Menu,3,2,0
+39,3,Buffalo Chicken Melt,Hand-Crafted Melts,4,2,0
 1,4,Spicy Chicken Sandwich Box,Big Box Meals,1,1,1
 2,4,Classic Chicken Sandwich Box,Big Box Meals,5,1,1
-3,4,Classic Chicken Sandwich Box,Big Box Meals,6,1,0
+3,4,Classic Chicken Sandwich Box,Big Box Meals,6,1,1
 4,4,Chicken and Pancakes,Combo Meals,6,2,1
 5,4,Buffalo Crispy Chicken Strips and Fries,Entrées,7,2,1
 6,4,Boneless BBQ Crispy Chicken Strips and Fries,Entrées,5,2,1
-7,4,3 pc. Chicken Box,Big Box Meals,7,1,0
+7,4,3 pc. Chicken Box,Big Box Meals,7,1,1
+8,4,Spicy Chicken Sandwich Box,Big Box Meals,1,1,1
+9,4,Classic Chicken Sandwich Box,Big Box Meals,3,1,1
+10,4,3 pc. Chicken Box,Big Box Meals,1,1,1
+11,4,Spicy Chicken Sandwich Box,Big Box Meals,7,1,1
+12,4,Spicy Chicken Sandwich Box,Big Box Meals,5,1,1
+13,4,Spicy Chicken Sandwich Box,Big Box Meals,5,1,1
+14,4,Spicy Chicken Sandwich Box,Big Box Meals,4,1,1
+15,4,Classic Chicken Sandwich Box,Big Box Meals,3,1,1
+16,4,Classic Chicken Sandwich Box,Big Box Meals,4,1,1
+17,4,Classic Chicken Sandwich Box,Big Box Meals,4,1,1
+18,4,Spicy Chicken Sandwich Box,Big Box Meals,6,1,0
+19,4,Spicy Chicken Sandwich Box,Big Box Meals,1,1,1
+20,4,Classic Chicken Sandwich Box,Big Box Meals,1,1,1
+21,4,3 pc. Chicken Box,Big Box Meals,1,1,1
+22,4,Spicy Chicken Sandwich Box,Big Box Meals,1,1,1
+23,4,Spicy Chicken Sandwich Box,Big Box Meals,1,1,1
+24,4,Spicy Chicken Sandwich Box,Big Box Meals,4,1,1
+25,4,Classic Chicken Sandwich Box,Big Box Meals,5,1,1
+26,4,3 pc. Chicken Box,Big Box Meals,4,1,1
+27,4,Chicken and Pancakes,Combo Meals,6,2,0
+28,4,Classic Chicken Sandwich Box,Big Box Meals,4,1,1
+29,4,3 pc. Chicken Box,Big Box Meals,5,1,1

@@ -38,7 +38,7 @@ public class Client {
 
             stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Login");
+            stage.setTitle("Login - Register");
             stage.setResizable(false);
             stage.show();
 

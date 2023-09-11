@@ -355,11 +355,10 @@ public class RestaurantUser {
                 if (newOrder.getMessage().equals("no new order") == false) {
                     System.out.println(newOrder.getMessage());
 
-                    isNewOrderChecking = false;
-
-                    if (ordersController != null)
+                    if (ordersController != null) {
+                        isNewOrderChecking = false;
                         new Thread(() -> getRestaurantOrders()).start();
-
+                    }
                     Platform.runLater(() -> {
                         if (controller != null) {
                             controller.newOrderCount.setText(newOrder.getMessage());
